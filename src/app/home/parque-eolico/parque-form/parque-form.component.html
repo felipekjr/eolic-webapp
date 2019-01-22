@@ -1,0 +1,45 @@
+<!-- Modal -->
+<div class="modal fade" id="parqueModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">PARQUE</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <p class="text-danger">*nome e complexo éolico obrigatório</p>
+        <form parque="ngForm" [formGroup]="parqueForm" (ngSubmit)="onSubmit()">
+          <div class="form-group">
+            <label for="nome">Nome</label>
+            <input type="text" formControlName="nome" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="latitude">Latitude</label>
+            <input type="text" formControlName="latitude" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="longitude">Longitude</label>
+            <input type="text" formControlName="longitude" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="potencia_instalada">Potencia Instalada</label>
+            <input type="text" formControlName="potencia_instalada" class="form-control" />
+          </div>
+          <div class="form-group">
+            <label for="exampleFormControlSelect1">ID do Complexo Eólico</label>
+            <select class="form-control" id="exampleFormControlSelect1" formControlName="complexoEolico">
+              <option *ngFor="let complexo of complexos" [ngValue]="complexo">{{complexo.id}}</option>
+            </select>
+          </div>
+          <div class="form-group modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+            <button type="submit" [disabled]="loading" class="btn btn-primary" *ngIf="isUpdate">Atualizar</button>
+            <button type="submit" [disabled]="loading" class="btn btn-primary" *ngIf="!isUpdate">Cadastrar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

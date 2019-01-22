@@ -1,0 +1,7 @@
+<div class="container-fluid">
+    <div class="row" id="homeContainer">
+        <app-complexo-eolico class="col-xs-12 col-md-4" (parqueForDelete)="deleteParque($event)" (hasComplexo)="onMatchComplexo($event)"></app-complexo-eolico>
+        <app-parque-eolico class="col-xs-12 col-md-4" (parqueIsDeleted)="parqueDeleted($event)" [hasComplexo]="hasComplexo" (hasParque)="onMatchParque($event)"></app-parque-eolico>
+        <app-aerogerador class="col-xs-12 col-md-4" [hasParque]="hasParque" (hasAerogerador)="onMatchAerogerador($event)"></app-aerogerador>
+    </div>    
+</div>
