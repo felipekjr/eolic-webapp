@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 
-import { ComplexoService } from '../../../_services/complexo.service'
-import { Complexo } from '../../../_models/complexo'
+import { ComplexoEolicoService } from '../../../_services/complexo-eolico.service'
+import { ComplexoEolico } from '../../../_models/complexo-eolico.model.'
 
 @Component({
   selector: 'app-complexo-form',
@@ -13,13 +13,13 @@ export class ComplexoFormComponent implements OnChanges {
 
   @Input() complexo;
   @Input() operation;
-  complexos: Complexo[];
+  complexos: ComplexoEolico[];
   complexoForm: FormGroup;
   isUpdate: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private complexoService: ComplexoService
+    private complexoService: ComplexoEolicoService
   ) { }
 
 

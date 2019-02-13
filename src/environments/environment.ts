@@ -3,8 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  chaveUsuarioAcessoLocalStorage: 'usuario_acesso',
+  chaveModuloAtualLocalStorage: 'modulo_atual',
+  chaveTokenAcessoLocalStorage: 'token_acesso',
+  parqueEolico: 'parque_eolico',
+  apiUrl: 'http://localhost:8080/api'
 };
+
 
 /*
  * For easier debugging in development mode, you can import the following file

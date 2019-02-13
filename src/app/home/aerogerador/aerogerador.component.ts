@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 import { AerogeradorService } from '../../_services/aerogerador.service'
-import { Aerogerador } from '../../_models/aerogerador'
+import { Aerogerador  } from '../../_models/aerogerador.model'
 
 @Component({
   selector: 'app-aerogerador',
@@ -22,7 +22,7 @@ export class AerogeradorComponent implements OnInit {
       this.aerogeradorForUpdate = aerogerador;
       this.isUpdate = true;
     } else {
-      this.aerogeradorForUpdate = new Aerogerador
+      this.aerogeradorForUpdate = new Aerogerador()
       this.isUpdate = false;
     }
   }

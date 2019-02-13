@@ -1,35 +1,69 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+/**
+ * Created by Gustavo Galvao on 16/07/2018.
+ */
+import {Injectable} from '@angular/core';
+import {Router} from '@angular/router';
 
-import { User } from '../_models/user';
+import {isNullOrUndefined} from 'util';
+import {HttpService} from './http.service';
+import {environment} from '../../environments/environment';
+import {MensagemUtil} from '../_util/mensagem.util';
+import {Usuario, UsuarioBuilder} from '../_models/usuario.model';
+
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class AuthenticationService {
 
-    private currentUserSubject: BehaviorSubject<User>;
-    public currentUser: Observable<User>;
-    baseUrl: string = 'https://eolic-api.herokuapp.com/api/login';
+  private _usuarioLogado: Usuario;
 
-    constructor(private http: HttpClient) {
-        this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
-        this.currentUser = this.currentUserSubject.asObservable();
-    }    
+  constructor(private httpService: HttpService, private router: Router, private mensagemUtil: MensagemUtil) {
+    this.carregarUsuario();
+  }
 
-    login(user: User) {
-        if (user && user.token) {
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('currentUser', JSON.stringify(user));
-            console.log(JSON.parse(localStorage.getItem('currentUser')));
-        }
-        return localStorage.getItem('currentUser');
-    }
-    
-    logout() {
-        // remove o usuário do local storage
-        localStorage.removeItem('currentUser');
-        this.currentUserSubject.next(null);
-    }
+  public entrar(login: string, senha: string): void {
+    this.httpService.post('/login', {login: login, senha: senha})
+      .subscribe(response => {
+        console.log(response);
+        localStorage.setItem(environment.chaveTokenAcessoLocalStorage, response.token);
+        this.salvarUsuario(this.serializarUsuario(response));
+        this.router.navigateByUrl('/home');
+      }, (error) => {
+        console.log(JSON.stringify(error));
+      senha = '';
+      this.mensagemUtil.adicionarMensagensDeErro('Login', error);
+      });
+  }
+
+  public sair(): void {
+    localStorage.clear();
+    this._usuarioLogado = null;
+    this.router.navigateByUrl('/login');
+  }
+
+  public isLogged(): boolean {
+    return !isNullOrUndefined(this._usuarioLogado);
+  }
+
+  get usuarioLogado(): Usuario {
+    return this._usuarioLogado;
+  }
+
+  private carregarUsuario() {
+    this._usuarioLogado = JSON.parse(localStorage.getItem(environment.chaveUsuarioAcessoLocalStorage));
+  }
+
+  private salvarUsuario(usuario: Usuario) {
+    localStorage.setItem(environment.chaveUsuarioAcessoLocalStorage, JSON.stringify(usuario));
+    this._usuarioLogado = usuario;
+  }
+
+  private serializarUsuario(response: any): Usuario {
+    return new UsuarioBuilder()
+      .comID(response.id)
+      .comLogin(response.login)
+      .construir();
+  }
+
 }

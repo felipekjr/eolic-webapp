@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 
-import { ComplexoService } from '../../_services/complexo.service'
-import { ParqueService } from '../../_services/parque.service'
+import { ComplexoEolicoService } from '../../_services/complexo-eolico.service'
+import { ParqueEolicoService } from '../../_services/parque-eolico.service'
 
-import { Complexo } from '../../_models/complexo'
+import { ComplexoEolico } from '../../_models/complexo-eolico.model.'
 
 @Component({
   selector: 'app-complexo-eolico',
@@ -11,33 +11,33 @@ import { Complexo } from '../../_models/complexo'
   styleUrls: ['./complexo-eolico.component.scss']
 })
 export class ComplexoEolicoComponent implements OnInit {
-  complexos: Complexo[];
+  complexos: ComplexoEolico[];
   parques = [];
   aerogeradores = [];
   isUpdate: boolean;
-  complexoForUpdate: Complexo;
+  complexoForUpdate: ComplexoEolico;
   @Output() hasComplexo = new EventEmitter<boolean>();
   @Output() parqueForDelete = new EventEmitter();
   parqueDeletedConfirmed: boolean
 
   constructor(
-    private complexoService: ComplexoService,
-    private parqueService: ParqueService
+    private complexoService: ComplexoEolicoService,
+    private parqueService: ParqueEolicoService
   ) { }
 
-  updateComplexo(complexo: Complexo) {
+  updateComplexo(complexo: ComplexoEolico) {
     if (complexo) {
       this.complexoForUpdate = complexo;
       this.isUpdate = true;
     } else {
-      this.complexoForUpdate = new Complexo
+      this.complexoForUpdate = new ComplexoEolico()
       this.isUpdate = false;
     }
   }
 
   //help function delay
   delay = ms => new Promise(res => setTimeout(res, ms));
-  async deleteComplexo(complexo: Complexo) {
+  async deleteComplexo(complexo: ComplexoEolico) {
     if(this.parques.length != 0){
       await this.deleteParquesRequest(complexo)
       await this.delay(500);
@@ -58,7 +58,7 @@ export class ComplexoEolicoComponent implements OnInit {
     
   }
 
-  deleteParquesRequest(complexo: Complexo) {
+  deleteParquesRequest(complexo: ComplexoEolico) {
     this.parques.forEach(parque => {
       if (parque.complexoEolico.id == complexo.id) {
         this.parqueForDelete.emit(parque)

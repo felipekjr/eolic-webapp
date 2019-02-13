@@ -1,10 +1,10 @@
 import { Component, Input, SimpleChanges, OnChanges, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 
-import { Aerogerador } from '../../../_models/aerogerador'
-import { Parque } from '../../../_models/parque'
+import { Aerogerador } from '../../../_models/aerogerador.model'
+import { ParqueEolico } from '../../../_models/parque-eolico.model'
 import { AerogeradorService } from '../../../_services/aerogerador.service'
-import { ParqueService } from '../../../_services/parque.service'
+import { ParqueEolicoService } from '../../../_services/parque-eolico.service'
 @Component({
   selector: 'app-aerogerador-form',
   templateUrl: './aerogerador-form.component.html',
@@ -15,12 +15,12 @@ export class AerogeradorFormComponent implements OnChanges {
   @Input() aerogerador
   @Input() operation
   isUpdate: boolean = false
-  parques: Parque[]
-  parque: Parque
+  parques: ParqueEolico[]
+  parque: ParqueEolico
 
   constructor(
     private formBuilder: FormBuilder,
-    private parqueService: ParqueService,
+    private parqueService: ParqueEolicoService,
     private aerogeradorService: AerogeradorService
   ) { }
 
@@ -51,8 +51,8 @@ export class AerogeradorFormComponent implements OnChanges {
         nome: [this.aerogerador.nome, Validators.required],
         latitude: [this.aerogerador.latitude],
         longitude: [this.aerogerador.longitude],
-        altura_torre: [this.aerogerador.altura_torre],
-        diametro_varredura: [this.aerogerador.diametro_varredura],
+        alturaTorre: [this.aerogerador.alturaTorre],
+        diametroVarredura: [this.aerogerador.diametroVarredura],
         modelo: [this.aerogerador.modelo],
         parqueEolico: [this.aerogerador.parqueEolico]
       })
@@ -63,7 +63,7 @@ export class AerogeradorFormComponent implements OnChanges {
         latitude: ['',],
         longitude: ['',],
         altura_torre: ['',],
-        diametro_varredura: ['',],
+        diametroVarredura: ['',],
         modelo: ['',],
         parqueEolico: ['', Validators.required]
       })

@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 
-import { ParqueService } from '../../../_services/parque.service'
-import { ComplexoService } from '../../../_services/complexo.service'
-import { Parque } from '../../../_models/parque'
-import { Complexo } from '../../../_models/complexo'
+import { ParqueEolicoService } from '../../../_services/parque-eolico.service'
+import { ComplexoEolicoService } from '../../../_services/complexo-eolico.service'
+import { ParqueEolico } from '../../../_models/parque-eolico.model'
+import { ComplexoEolico } from '../../../_models/complexo-eolico.model.'
 
 @Component({
   selector: 'app-parque-form',
@@ -15,16 +15,16 @@ export class ParqueFormComponent implements OnChanges {
 
   @Input() parque;
   @Input() operation;
-  parques: Parque[];
-  complexos: Complexo[];
-  complexo: Complexo;
+  parques: ParqueEolico[];
+  complexos: ComplexoEolico[];
+  complexo: ComplexoEolico;
   parqueForm: FormGroup;
   isUpdate: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
-    private parqueService: ParqueService,
-    private complexoService: ComplexoService
+    private parqueService: ParqueEolicoService,
+    private complexoService: ComplexoEolicoService
   ) { }
 
 

@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
-import { ParqueService } from '../../_services/parque.service'
+import { ParqueEolicoService } from '../../_services/parque-eolico.service'
 import { AerogeradorService } from '../../_services/aerogerador.service'
-import { Parque } from '../../_models/parque'
-import { Aerogerador } from '../../_models/aerogerador';
+import { ParqueEolico } from '../../_models/parque-eolico.model'
+import { Aerogerador } from '../../_models/aerogerador.model';
 import { cleanSession } from 'selenium-webdriver/safari';
 
 @Component({
@@ -12,34 +12,34 @@ import { cleanSession } from 'selenium-webdriver/safari';
   styleUrls: ['./parque-eolico.component.scss']
 })
 export class ParqueEolicoComponent implements OnInit {
-  parques: Parque[];
+  parques: ParqueEolico[];
   aerogeradores = [];
   @Input() hasComplexo: boolean;
   @Output() hasParque = new EventEmitter<boolean>();
   @Output() parqueIsDeleted = new EventEmitter<boolean>();
   isUpdate: boolean;
-  parqueForUpdate: Parque
-  parqueForDelete: Parque;
+  parqueForUpdate: ParqueEolico
+  parqueForDelete: ParqueEolico;
 
   constructor(
-    private parqueService: ParqueService,
+    private parqueService: ParqueEolicoService,
     private aerogeradorService: AerogeradorService
   ) { }
 
 
-  updateParque(parque: Parque) {
+  updateParque(parque: ParqueEolico) {
     if (parque) {
       this.parqueForUpdate = parque;
       this.isUpdate = true;
     } else {
-      this.parqueForUpdate = new Parque
+      this.parqueForUpdate = new ParqueEolico
       this.isUpdate = false;
     }
   }
 
   //helper function delay
   delay = ms => new Promise(res => setTimeout(res, ms));
-  async deleteParque(parque: Parque, fromComplexo: boolean) {
+  async deleteParque(parque: ParqueEolico, fromComplexo: boolean) {
     try {
       await this.deleteAerogeradores(parque)
       await this.delay(500);
@@ -55,10 +55,10 @@ export class ParqueEolicoComponent implements OnInit {
     }
   }
 
-  deleteAerogeradores(parque: Parque) {
+  deleteAerogeradores(parque: ParqueEolico) {
     this.aerogeradores.forEach(aerogerador => {
       if (aerogerador.parqueEolico.id == parque.id) {
-        this.aerogeradorService.deleteAerogerador(aerogerador.id).subscribe()
+        this.aerogeradorService.deleteAerogerador(aerogerador.id).subscribe();
       }
     })
   }
