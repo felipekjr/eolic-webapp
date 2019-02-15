@@ -43,7 +43,7 @@ export class ParqueEolicoComponent implements OnInit {
     try {
       await this.deleteAerogeradores(parque)
       await this.delay(500);
-      this.parqueService.deleteParque(parque.id).subscribe();
+      this.parqueService.deletar(parque.id).subscribe();
 
       if (fromComplexo) {
         this.parqueIsDeleted.emit(true);
@@ -58,13 +58,13 @@ export class ParqueEolicoComponent implements OnInit {
   deleteAerogeradores(parque: ParqueEolico) {
     this.aerogeradores.forEach(aerogerador => {
       if (aerogerador.parqueEolico.id == parque.id) {
-        this.aerogeradorService.deleteAerogerador(aerogerador.id).subscribe();
+        this.aerogeradorService.deletar(aerogerador.id).subscribe();
       }
     })
   }
 
   ngOnInit() {
-    this.parqueService.getParques()
+    this.parqueService.todos()
       .subscribe(data => {
         if (data) {
           if (data.length != 0) {
@@ -78,7 +78,7 @@ export class ParqueEolicoComponent implements OnInit {
           this.hasParque.emit(false);
         }
       });
-    this.aerogeradorService.getAerogeradores()
+    this.aerogeradorService.todos()
       .subscribe(data => {
         this.aerogeradores = data
       });

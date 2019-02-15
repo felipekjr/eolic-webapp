@@ -25,12 +25,10 @@ export class AuthenticationService {
   public entrar(login: string, senha: string): void {
     this.httpService.post('/login', {login: login, senha: senha})
       .subscribe(response => {
-        console.log(response);
         localStorage.setItem(environment.chaveTokenAcessoLocalStorage, response.token);
         this.salvarUsuario(this.serializarUsuario(response));
         this.router.navigateByUrl('/home');
       }, (error) => {
-        console.log(JSON.stringify(error));
       senha = '';
       this.mensagemUtil.adicionarMensagensDeErro('Login', error);
       });
@@ -50,7 +48,7 @@ export class AuthenticationService {
     return this._usuarioLogado;
   }
 
-  private carregarUsuario() {
+ public carregarUsuario() {
     this._usuarioLogado = JSON.parse(localStorage.getItem(environment.chaveUsuarioAcessoLocalStorage));
   }
 
@@ -65,5 +63,4 @@ export class AuthenticationService {
       .comLogin(response.login)
       .construir();
   }
-
 }

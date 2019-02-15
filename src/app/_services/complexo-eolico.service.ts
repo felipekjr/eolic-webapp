@@ -15,29 +15,8 @@ export class ComplexoEolicoService extends AbstractCrudService<ComplexoEolico>{
   ) {
     super(httpService)
   }
-  baseUrl: string = '/complexo_eolico';
 
-    getComplexos() {
-        // return this.http.get<Complexo[]>(this.getUrlBase);
-      return this.httpService.get(this.getUrlBase());
-    }
-
-    getComplexoById(id: number) {
-      return this.httpService.get(this.getUrlBase() + '/' + id);
-    }
-
-    createComplexo(complexo: ComplexoEolico) {
-        return this.httpService.post(this.getUrlBase(), complexo);
-    }
-
-    updateComplexo(complexo: ComplexoEolico) {
-        return this.httpService.put(this.getUrlBase() + '/' + complexo.id, complexo);
-    }
-
-    deleteComplexo(id: number) {
-        return this.httpService.delete(this.getUrlBase() + '/' + id);
-    }
     getUrlBase(): string {
-      return 'complexo-eolico';
+      return '/complexo_eolico';
     }
 }

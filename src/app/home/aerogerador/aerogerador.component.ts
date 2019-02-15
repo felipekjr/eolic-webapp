@@ -28,9 +28,9 @@ export class AerogeradorComponent implements OnInit {
   }
 
   deleteAerogerador(aerogerador: Aerogerador) {
-    this.aerogeradorService.deleteAerogerador(aerogerador.id)
+    this.aerogeradorService.deletar(aerogerador.id)
       .subscribe(data => {
-        this.aerogeradorService.getAerogeradores()
+        this.aerogeradorService.todos()
           .subscribe(data => {
             this.aerogeradores = data;
           });
@@ -39,7 +39,7 @@ export class AerogeradorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.aerogeradorService.getAerogeradores()
+    this.aerogeradorService.todos()
       .subscribe(data => {
         this.aerogeradores = data;
         if (this.aerogeradores) {

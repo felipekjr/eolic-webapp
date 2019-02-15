@@ -13,27 +13,7 @@ export class UserService extends AbstractCrudService<Usuario>{
     ) {
       super(httpService)
     }
-    baseUrl :string = '/usuarios';
 
-    getUsers() {
-        return this.httpService.get(this.getUrlBase());
-    }
-
-    getUserById(id: number) {
-        return this.httpService.get(this.getUrlBase() + '/' + id);
-    }
-
-    createUser(user: Usuario) {
-        return this.httpService.post(this.getUrlBase(), user);
-    }
-
-    updateUser(user: Usuario) {
-        return this.httpService.put(this.getUrlBase() + '/' + user.id, user);
-    }
-
-    deleteUser(id: number) {
-        return this.httpService.delete(this.getUrlBase() + '/' + id);
-    }
   getUrlBase(): string {
     return '/usuarios';
   }

@@ -26,7 +26,7 @@ export class ComplexoFormComponent implements OnChanges {
   onSubmit(): void {
     //cadastro
     if (!this.isUpdate) {      
-      this.complexoService.createComplexo(this.complexoForm.value)
+      this.complexoService.salvar(this.complexoForm.value)
         .subscribe(data => {
           window.alert("COMPLEXO CADASTRADO COM SUCESSO!")
           location.reload();
@@ -34,7 +34,7 @@ export class ComplexoFormComponent implements OnChanges {
       //update  
     } else {
       this.complexoForm.value.id = this.complexo.id
-      this.complexoService.updateComplexo(this.complexoForm.value)
+      this.complexoService.editar(this.complexoForm.value)
         .subscribe(data => {
           window.alert("COMPLEXO ATUALIZADO COM SUCESSO!")
           location.reload();

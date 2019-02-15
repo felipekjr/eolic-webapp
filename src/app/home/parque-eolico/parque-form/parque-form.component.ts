@@ -31,7 +31,7 @@ export class ParqueFormComponent implements OnChanges {
   onSubmit(): void {
     //cadastro
     if (!this.isUpdate) {      
-      this.parqueService.createParque(this.parqueForm.value)
+      this.parqueService.salvar(this.parqueForm.value)
         .subscribe(data => {
           window.alert("PARQUE CADASTRADO COM SUCESSO!")
           location.reload();
@@ -40,7 +40,7 @@ export class ParqueFormComponent implements OnChanges {
     } else {
       console.log(this.parqueForm.value)
       this.parqueForm.value.id = this.parque.id
-      this.parqueService.updateParque(this.parqueForm.value)
+      this.parqueService.editar(this.parqueForm.value)
         .subscribe(data => {
           window.alert("PARQUE ATUALIZADO COM SUCESSO!")
           location.reload();
@@ -71,7 +71,7 @@ export class ParqueFormComponent implements OnChanges {
   }
 
   ngOnInit() {
-    this.complexoService.getComplexos()
+    this.complexoService.todos()
       .subscribe(data => {
         this.complexos = data;
       })

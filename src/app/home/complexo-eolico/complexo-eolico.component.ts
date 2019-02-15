@@ -44,13 +44,13 @@ export class ComplexoEolicoComponent implements OnInit {
       if (this.parqueDeletedConfirmed) {
         console.log("Parques Deletados");
         await this.delay(1000);
-        this.complexoService.deleteComplexo(complexo.id).subscribe(data => {
+        this.complexoService.deletar(complexo.id).subscribe(data => {
           window.alert("COMPLEXO DELETADO COM SUCESSO!")
           location.reload()
         })
       }
     }else{
-      this.complexoService.deleteComplexo(complexo.id).subscribe(data => {
+      this.complexoService.deletar(complexo.id).subscribe(data => {
         window.alert("COMPLEXO DELETADO COM SUCESSO!")
         location.reload()
       })
@@ -67,7 +67,7 @@ export class ComplexoEolicoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.complexoService.getComplexos()
+    this.complexoService.todos()
       .subscribe(data => {
         if (data) {          
           if (data.length != 0) {           
@@ -80,7 +80,7 @@ export class ComplexoEolicoComponent implements OnInit {
           this.hasComplexo.emit(false)  
         }        
       });
-    this.parqueService.getParques()
+    this.parqueService.todos()
       .subscribe(data => {
         this.parques = data;
       });

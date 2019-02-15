@@ -1,26 +1,23 @@
-import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, Router } from '@angular/router';
-import { Observable } from 'rxjs';
+/**
+ * Created by Gustavo Galvao on 16/07/2018.
+ */
+import {Injectable} from '@angular/core';
+import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
+import {Observable} from 'rxjs';
+import {AuthenticationService} from '../_services/authentication.service'
 
-import { AuthenticationService } from '../_services/authentication.service'
-
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class AuthGuard implements CanActivate {
-  constructor(
-    private router: Router,
-    private authenticationService: AuthenticationService
-  ){}
-  
-  canActivate(route : ActivatedRouteSnapshot, state: RouterStateSnapshot){    
-    const currentUser = JSON.parse(localStorage.getItem('currentUser'))    
-    if(currentUser){      
-      //o usuário está logado
-      return true;
+
+  constructor(private authenticationService: AuthenticationService, private router: Router) {
+  }
+
+  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+    const usuarioLogado = this.authenticationService.isLogged();
+    if (!usuarioLogado) {
+      this.router.navigateByUrl('/login');
     }
-    this.router.navigate(['/login'],{queryParams:{returnUrl: state.url}});
-    return false;
-  }   
-  
+
+    return true;
+  }
 }

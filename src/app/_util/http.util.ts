@@ -18,7 +18,7 @@ export class HttpUtil {
     headersParams['X-Origem'] = 'WINBOX_WEB';
     const token: string = localStorage.getItem(environment.chaveTokenAcessoLocalStorage);
     if (token) {
-      headersParams['Authorization'] = 'Bearer ' + token;
+      headersParams['Authorization'] = token;
     }
     return {headers: new HttpHeaders(headersParams)};
   }
@@ -51,22 +51,22 @@ export class HttpUtil {
     return throwError(erro);
   }
 
-  public static downloadFile(type: string, response: Blob, nomeArquivo: string) {
-    const blob = new Blob([response], { type: type });
-    const url = window.URL.createObjectURL(blob);
-
-    if (navigator.msSaveOrOpenBlob) {
-      navigator.msSaveBlob(blob);
-    } else {
-      const a = document.createElement('a');
-      a.href = url;
-      a.download = nomeArquivo;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
-    }
-    window.URL.revokeObjectURL(url);
-  }
+  // public static downloadFile(type: string, response: Blob, nomeArquivo: string) {
+  //   const blob = new Blob([response], { type: type });
+  //   const url = window.URL.createObjectURL(blob);
+  //
+  //   if (navigator.msSaveOrOpenBlob) {
+  //     navigator.msSaveBlob(blob);
+  //   } else {
+  //     const a = document.createElement('a');
+  //     a.href = url;
+  //     a.download = nomeArquivo;
+  //     document.body.appendChild(a);
+  //     a.click();
+  //     document.body.removeChild(a);
+  //   }
+  //   window.URL.revokeObjectURL(url);
+  // }
 
   private static getMensagensDeErro(errors: any): string[] {
     const mensagens: string[] = [];

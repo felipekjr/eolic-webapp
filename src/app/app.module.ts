@@ -6,7 +6,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 
-import { JwtInterceptor } from './_helpers/jwt.interceptor';
 import { ErrorInterceptor } from './_helpers/error.interceptor';
 
 import {ToastrModule} from 'ngx-toastr';
@@ -23,6 +22,8 @@ import { AerogeradorFormComponent } from './home/aerogerador/aerogerador-form/ae
 import { ComplexoFormComponent } from './home/complexo-eolico/complexo-form/complexo-form.component';
 import { ParqueFormComponent } from './home/parque-eolico/parque-form/parque-form.component';
 import { HttpService} from './_services/http.service';
+import {AuthGuard} from './_guards/auth.guard';
+import {AuthenticationService} from './_services/authentication.service';
 
 
 @NgModule({
@@ -50,10 +51,11 @@ import { HttpService} from './_services/http.service';
       preventDuplicates: true,
     })
   ],
-  // providers: [
-  //   { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-  //   { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-  // ],
+  providers:[
+    AuthGuard,
+    AuthenticationService,
+    HttpService
+  ],
 
   bootstrap: [AppComponent]
 })

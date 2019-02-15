@@ -28,7 +28,7 @@ export class AerogeradorFormComponent implements OnChanges {
   onSubmit(): void {
     //cadastro
     if (!this.isUpdate) {     
-      this.aerogeradorService.createAerogerador(this.aerogeradorForm.value)
+      this.aerogeradorService.salvar(this.aerogeradorForm.value)
         .subscribe(data => {
           window.alert("AEROGERADOR CADASTRADO COM SUCESSO!")
           location.reload();
@@ -36,7 +36,7 @@ export class AerogeradorFormComponent implements OnChanges {
       //update  
     } else {
       this.aerogeradorForm.value.id = this.aerogerador.id
-      this.aerogeradorService.updateAerogerador(this.aerogeradorForm.value)
+      this.aerogeradorService.editar(this.aerogeradorForm.value)
         .subscribe(data => {
           window.alert("AEROGERADOR ATUALIZADO COM SUCESSO!")
           location.reload();
@@ -72,7 +72,7 @@ export class AerogeradorFormComponent implements OnChanges {
 
 
   ngOnInit() {
-    this.parqueService.getParques()
+    this.parqueService.todos()
       .subscribe(data => {
         this.parques = data;
       })
