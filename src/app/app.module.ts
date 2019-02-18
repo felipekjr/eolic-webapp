@@ -4,59 +4,37 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
-import { routing } from './app.routing';
-
-import { ErrorInterceptor } from './_helpers/error.interceptor';
+import {AppRoutingModule} from './app-routing.module';
 
 import {ToastrModule} from 'ngx-toastr';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SweetAlert2Module} from '@toverux/ngx-sweetalert2'
+import {CoreModule} from './core/core.module';
+import {ModalModule} from 'ngx-bootstrap';
 
+import {AutenticacaoModule} from './modulos/autenticacao/autenticacao.module';
+import {AdministrativoModule} from './modulos/administrativo/administrativo.module';
 
-import { LoginComponent} from './login/login.component';
-import { HomeComponent } from './home/home.component';
-import { AerogeradorComponent } from './home/aerogerador/aerogerador.component';
-import { ParqueEolicoComponent } from './home/parque-eolico/parque-eolico.component';
-import { ComplexoEolicoComponent } from './home/complexo-eolico/complexo-eolico.component';
-import { AerogeradorFormComponent } from './home/aerogerador/aerogerador-form/aerogerador-form.component';
-import { ComplexoFormComponent } from './home/complexo-eolico/complexo-form/complexo-form.component';
-import { ParqueFormComponent } from './home/parque-eolico/parque-form/parque-form.component';
-import { HttpService} from './_services/http.service';
-import {AuthGuard} from './_guards/auth.guard';
-import {AuthenticationService} from './_services/authentication.service';
-
+import {AuthGuard} from './core/guards/auth.guard';
+import {AuthenticationService} from './core/http/authentication.service';
+import {HttpService} from './core/http/http.service';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    LoginComponent,
-    HomeComponent,
-    AerogeradorComponent,
-    ParqueEolicoComponent,
-    ComplexoEolicoComponent,
-    AerogeradorFormComponent,
-    ComplexoFormComponent,
-    ParqueFormComponent,
-
+    AppComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
-    ReactiveFormsModule,
+    CoreModule,
+    AppRoutingModule,
     HttpClientModule,
-    routing,
+    ModalModule.forRoot(),
     SweetAlert2Module.forRoot(),
     ToastrModule.forRoot({
       preventDuplicates: true,
     })
   ],
-  providers:[
-    AuthGuard,
-    AuthenticationService,
-    HttpService
-  ],
-
   bootstrap: [AppComponent]
 })
 
