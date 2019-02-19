@@ -3,6 +3,7 @@ import {ParqueEolico} from './parque-eolico.model';
 
 export class ComplexoEolico extends Entidade {
   nome: string;
-  uf: String;
+  uf: string;
+  identificador: string;
   parquesEolicos: Array<ParqueEolico> = [];
 }

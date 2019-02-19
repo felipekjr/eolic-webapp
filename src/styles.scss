@@ -1,6 +1,11 @@
+@import '~bootstrap/scss/bootstrap.scss';
+
 body{
-  overflow-x:hidden;
+  overflow-x: hidden;
 }
 a{
   cursor: pointer;
+}
+#toast-container > div {
+  opacity:1;
 }

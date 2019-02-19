@@ -5,19 +5,19 @@
     </p>
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item" *ngFor="let complexo of complexos">
-      <div class="d-flex justify-content-between ">
-        {{complexo.nome}}
+    <li class="list-group-item" *ngFor="let complexoEolico of complexosEolicos">
+      <div class="d-flex justify-content-between">
+        {{complexoEolico.nome}}
         <span>
-          <i class="fas fa-edit" data-toggle="modal" data-target="#complexoModal" (click)="updateComplexo(complexo)"></i>
-          <i class="fas fa-times-circle" (click)="deleteComplexo(complexo)"></i>
+          <i class="fas fa-edit" data-toggle="modal" data-target="#complexoModal" (click)="callbackBotaoEditarComplexo(complexoEolico.id)"></i>
+          <i class="fas fa-times-circle" (click)="callbackBotaoDeletarComplexo(complexoEolico.id)"></i>
         </span>
       </div>
     </li>
   </ul>
   <div class="card-footer">
-    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#complexoModal" (click)="updateComplexo(null)">CADASTRAR</button>
+    <button type="button" class="btn btn-primary btn-block"  (click)="callbackBotaoEditarComplexo()">CADASTRAR</button>
   </div>
 </div>
 
-<app-complexo-form [complexo]="complexoForUpdate" [operation]="isUpdate"></app-complexo-form>
+<app-complexo-form #modalComplexoEolico [complexoEolico]="complexoEolico" [isUpdate]="isUpdate"></app-complexo-form>

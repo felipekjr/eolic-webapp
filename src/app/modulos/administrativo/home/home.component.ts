@@ -13,8 +13,10 @@ export class HomeComponent implements OnInit {
   hasComplexo : boolean;
   hasParque : boolean;
   hasAerogerador : boolean;
+
   @ViewChild(ParqueEolicoComponent) parque: ParqueEolicoComponent;
   @ViewChild(ComplexoEolicoComponent) complexo: ComplexoEolicoComponent;
+
   constructor(
     private mensagemUtil : MensagemUtil,
     private authenticationService : AuthenticationService

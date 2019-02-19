@@ -25,11 +25,7 @@ export class MensagemUtil {
   }
 
   adicionarMensagemDeErro(casoDeUso: string, mensagemDeErro: string) {
-    console.log( this.toastrService.error(
-      mensagemDeErro,
-      casoDeUso
-    ))
-   ;
+  this.toastrService.error(mensagemDeErro, casoDeUso)
   }
 
   adicionarMensagemDeWarning(casoDeUso: string, mensagemDeWarning: string) {

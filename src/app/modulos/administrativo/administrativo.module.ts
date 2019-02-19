@@ -13,6 +13,12 @@ import {AuthenticationService} from '../../core/http/authentication.service';
 import {HttpService} from '../../core/http/http.service';
 import {AdministrativoRoutingModule} from './administrativo-routing.module';
 import { AdministrativoComponent } from './administrativo.component';
+import {ComplexoEolicoSharedService} from '../../core/services/complexo-eolico-shared.service';
+import {ModalModule} from 'ngx-bootstrap';
+import {ComplexoEolicoService} from '../../core/crud/complexo-eolico.service';
+import {SharedModule} from '../../shared/shared.module';
+import {ModalHeaderModule} from '../../shared/modal-header/modal-header.module';
+import {ModalFooterModule} from '../../shared/modal-footer/modal-footer.module';
 
 
 
@@ -28,15 +34,15 @@ import { AdministrativoComponent } from './administrativo.component';
     AdministrativoComponent
   ],
   imports: [
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    AdministrativoRoutingModule
+    AdministrativoRoutingModule,
+    SharedModule
   ],
   providers:[
     AuthGuard,
     AuthenticationService,
-    HttpService
+    HttpService,
+    ComplexoEolicoSharedService,
+    ComplexoEolicoService
   ],
 })
 export class AdministrativoModule { }

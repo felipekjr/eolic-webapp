@@ -13,10 +13,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
-    login: string;
-    senha: string;
-    users : Usuario[];
-    
+    hasParametrosLogin: boolean;
     constructor(
         private formBuilder: FormBuilder,
         private route: ActivatedRoute,
@@ -27,20 +24,19 @@ export class LoginComponent implements OnInit {
     ) { }
 
     // get para pegar os campos do form
-    get f() { return this.loginForm.controls; }
+    get login() { return this.loginForm.get('login')}
+    get senha() { return this.loginForm.get('senha')}
 
     entrarNoSistema() {
-        this.login = this.f.username.value;
-        this.senha = this.f.password.value;
-        this.authenticationService.entrar(this.login, this.senha);
+        this.authenticationService.entrar(this.login.value, this.senha.value);
     }
 
     ngOnInit() {
         this.loginForm = this.formBuilder.group({
-            username: ['', Validators.required],
-            password: ['', Validators.required]
+            login: ['', Validators.required],
+            senha: ['', Validators.required]
         });
-        // reseta o status do login
         this.authenticationService.sair();
+        this.hasParametrosLogin = false;
     }
 }
