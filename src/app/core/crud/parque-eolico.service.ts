@@ -4,6 +4,9 @@ import { HttpClient } from '@angular/common/http';
 import { ParqueEolico } from '../modelos/parque-eolico.model'
 import {HttpService} from '../http/http.service';
 import {AbstractCrudService} from './abstract-crud.service';
+import { ParqueEolicoSharedService } from '../services/parque-eolico-shared.service';
+import { Observable } from 'rxjs';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +14,16 @@ import {AbstractCrudService} from './abstract-crud.service';
 export class ParqueEolicoService extends AbstractCrudService<ParqueEolico>{
 
   constructor(
-   protected httpService: HttpService
+   protected httpService: HttpService,
+   private parqueEolicoSharedService : ParqueEolicoSharedService
   ) {
     super(httpService);
   }
-    getUrlBase(): string {
-      return '/parque_eolico';
-    }
+  getChangeEmittedParqueEolico(): Observable<any> {
+    return this.parqueEolicoSharedService.changeEmitted$;
+  }
+  getUrlBase(): string {
+    return '/parque_eolico';
+  }
 
 }

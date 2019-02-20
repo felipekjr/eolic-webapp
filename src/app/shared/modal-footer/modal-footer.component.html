@@ -1,5 +1,5 @@
 <div class="modal-footer">
   <button type="button" class="btn btn-secondary" (click)="onClickCloseButton($event)" >cancelar</button>
-  <button type="submit" class="btn btn-primary" required="formValid">{{isEdicao ? 'editar' : 'salvar'}}</button>
+  <button type="submit" class="btn btn-primary" [disabled]="!formValid">{{isUpdate ? 'editar' : 'salvar'}}</button>
   <ng-content select="[after-footer-buttons]"></ng-content>
 </div>

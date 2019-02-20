@@ -1,12 +1,12 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input,  Output} from '@angular/core';
 
 @Component({
   selector: 'modal-footer',
   templateUrl: './modal-footer.component.html'
 })
-export class ModalFooterComponent {
+export class ModalFooterComponent{
 
-  @Input() isEdicao: boolean;
+  @Input() isUpdate: boolean;
   @Input() formValid: boolean;
   @Output() clickCloseButton: EventEmitter<any> = new EventEmitter();
 
@@ -15,5 +15,6 @@ export class ModalFooterComponent {
   onClickCloseButton(event) {
     this.clickCloseButton.next(event);
   }
+ 
 
 }

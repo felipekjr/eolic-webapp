@@ -20,8 +20,7 @@ export class ComplexoEolicoComponent implements OnInit {
   parqueDeletedConfirmed: boolean
 
 
-  @ViewChild('modalComplexoEolico') modalComplexoEolico: any;
-  @ViewChild('modalParqueEolico') modalParqueEolico: any;
+  @ViewChild('modalComplexoEolico') modalComplexoEolico: any;  
   @ViewChild('form') form: any;
 
   private complexoEolicoSharedServiceSubscription: any;
@@ -48,7 +47,7 @@ export class ComplexoEolicoComponent implements OnInit {
     this.complexoEolicoSharedServiceSubscription = this.complexoEolicoService.getChangeEmittedComplexoEolico()
       .subscribe(complexoEolicoRecebido => {
         if (complexoEolicoRecebido) {
-          this.persistirEntidade(complexoEolicoRecebido);
+          this.persistirEntidade(complexoEolicoRecebido);        
         }
       });
   }
@@ -62,7 +61,7 @@ export class ComplexoEolicoComponent implements OnInit {
       }, erro => {
         this.mensagemUtil.adicionarMensagensDeErro('geral.complexo_eolico', erro);
       });
-    }else{
+    }else{    
       this.isUpdate = false;
       this.complexoEolico = new ComplexoEolico();
       this.modalComplexoEolico.abrirModal();
@@ -75,32 +74,11 @@ export class ComplexoEolicoComponent implements OnInit {
     const complexoEolicoIndex: number = thisComponent.complexosEolicos.findIndex(
           complexoEolico => complexoEolico.id === event);
     thisComponent.complexoEolicoService.deletar(event).subscribe(() => {
-      thisComponent.complexosEolicos.splice(complexoEolicoIndex, 1);
-      thisComponent.atualizarLista();
+      thisComponent.complexosEolicos.splice(complexoEolicoIndex, 1);    
+      thisComponent.mensagemUtil.adicionarMesagemSucesso('geral.complexo_eolico');  
       }, erro => {
           thisComponent.mensagemUtil.adicionarMensagensDeErro('geral.complexo_eolico', erro);
         })
-  }
-
-
-  private salvarEntidadeComplexoEolico(complexoEolicoRecebido: ComplexoEolico) {
-    this.complexoEolicoService.salvar(complexoEolicoRecebido).subscribe(complexoEolico => {
-      this.complexosEolicos.push(complexoEolico);
-      this.atualizarLista();
-    }, erro => {
-      this.mensagemUtil.adicionarMensagensDeErro('geral.complexo_eolico', erro);
-    });
-  }
-
-  private editarEntidadeComplexoEolico(complexoEolicoRecebido: ComplexoEolico) {
-    this.complexoEolicoService.editar(complexoEolicoRecebido).subscribe(complexoEolicoCadastrado => {
-      const complexoEolicoIndex: number = this.complexosEolicos.findIndex(
-        complexoEolico => complexoEolico.id === complexoEolicoRecebido.id);
-      this.complexosEolicos[complexoEolicoIndex] = complexoEolicoCadastrado;
-      this.atualizarLista();
-    }, erro => {
-      this.mensagemUtil.adicionarMensagensDeErro('geral.complexo_eolico', erro);
-    });
   }
 
   persistirEntidade(complexoEolicoRecebido: ComplexoEolico) {
@@ -110,18 +88,35 @@ export class ComplexoEolicoComponent implements OnInit {
       this.salvarEntidadeComplexoEolico(complexoEolicoRecebido);
     }
   }
-
-  private buscarComplexosEolicos() {
-    this.complexoEolicoService.todos().subscribe(complexosEolicos => {
-      this.complexosEolicos = complexosEolicos;
-      this.atualizarLista();
+ 
+  private editarEntidadeComplexoEolico(complexoEolicoRecebido: ComplexoEolico) {
+    this.complexoEolicoService.editar(complexoEolicoRecebido).subscribe(complexoEolicoCadastrado => {
+      const complexoEolicoIndex: number = this.complexosEolicos.findIndex(
+        complexoEolico => complexoEolico.id === complexoEolicoRecebido.id);      
+      this.complexosEolicos[complexoEolicoIndex] = complexoEolicoCadastrado;     
     }, erro => {
       this.mensagemUtil.adicionarMensagensDeErro('geral.complexo_eolico', erro);
     });
   }
 
-  private atualizarLista(){
+  private salvarEntidadeComplexoEolico(complexoEolicoRecebido: ComplexoEolico) {
+    this.complexoEolicoService.salvar(complexoEolicoRecebido).subscribe(complexoEolico => {
+      this.complexosEolicos.push(complexoEolico);     
+    }, erro => {
+      this.mensagemUtil.adicionarMensagensDeErro('geral.complexo_eolico', erro);
+    });
   }
+  
+
+  private buscarComplexosEolicos() {
+    this.complexoEolicoService.todos().subscribe(complexosEolicos => {
+      this.complexosEolicos = complexosEolicos;         
+      this.hasComplexo.emit(true)
+    }, erro => {
+      this.mensagemUtil.adicionarMensagensDeErro('geral.complexo_eolico', erro);
+    });
+  }
+  
 
   ngOnDestroy(): void {
     if (this.complexoEolicoSharedServiceSubscription) {

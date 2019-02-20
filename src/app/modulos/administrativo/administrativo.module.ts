@@ -19,6 +19,8 @@ import {ComplexoEolicoService} from '../../core/crud/complexo-eolico.service';
 import {SharedModule} from '../../shared/shared.module';
 import {ModalHeaderModule} from '../../shared/modal-header/modal-header.module';
 import {ModalFooterModule} from '../../shared/modal-footer/modal-footer.module';
+import { ParqueEolicoService } from '../../core/crud/parque-eolico.service';
+import { ParqueEolicoSharedService } from '../../core/services/parque-eolico-shared.service';
 
 
 
@@ -41,8 +43,10 @@ import {ModalFooterModule} from '../../shared/modal-footer/modal-footer.module';
     AuthGuard,
     AuthenticationService,
     HttpService,
-    ComplexoEolicoSharedService,
-    ComplexoEolicoService
+    ParqueEolicoService,
+    ParqueEolicoSharedService,
+    ComplexoEolicoService,
+    ComplexoEolicoSharedService    
   ],
 })
 export class AdministrativoModule { }

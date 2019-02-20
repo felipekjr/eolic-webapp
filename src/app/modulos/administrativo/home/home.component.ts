@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     private authenticationService : AuthenticationService
   ) { }
 
-  onMatchComplexo(event : boolean){   
+  onMatchComplexo(event : boolean){     
     event ? this.hasComplexo = true : this.hasComplexo = false;
   }
   onMatchParque(event : boolean){    
@@ -33,12 +33,15 @@ export class HomeComponent implements OnInit {
   }
 
   deleteParque(parqueForDelete){
-    this.parque.deleteParque(parqueForDelete, true)
+   
   }
   parqueDeleted(event){
     this.complexo.parqueDeletedConfirmed = true;
   }
   ngOnInit() {
-   this.mensagemUtil.adicionarMesagemBemVindo("Bem vindo " + `${this.authenticationService.usuarioLogado.login}` + "!")
+    setTimeout(
+      () => this.mensagemUtil.adicionarMesagemBemVindo("Bem vindo " + `${this.authenticationService.usuarioLogado.login}` + "!"),
+      500
+    )
   }
 }

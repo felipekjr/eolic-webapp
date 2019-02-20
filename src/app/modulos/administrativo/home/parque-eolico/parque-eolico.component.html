@@ -5,12 +5,12 @@
     </p>
   </div>
   <ul class="list-group list-group-flush">
-    <li class="list-group-item" *ngFor="let parque of parques">
+    <li class="list-group-item" *ngFor="let parqueEolico of parquesEolicos">
       <div class="d-flex justify-content-between ">
-        {{parque.nome}}
+        {{parqueEolico.nome}}
         <span>
-          <i class="fas fa-edit" data-toggle="modal" data-target="#parqueModal" (click)="updateParque(parque)"></i>
-          <i class="fas fa-times-circle" (click)="deleteParque(parque, false)"></i>
+          <i class="fas fa-edit" data-toggle="modal" data-target="#parqueModal" (click)="callbackBotaoEditarparque(parqueEolico.id)"></i>
+          <i class="fas fa-times-circle" (click)="callbackBotaoDeletarParque(parqueEolico.id)"></i>
         </span>
       </div>
 
@@ -22,4 +22,4 @@
   </div>
 </div>
 
-<app-parque-form [parque]="parqueForUpdate" [operation]="isUpdate"></app-parque-form>
+<app-parque-form #modalParqueEolico [parqueEolico]="parqueEolico" [isUpdate]="isUpdate"></app-parque-form>

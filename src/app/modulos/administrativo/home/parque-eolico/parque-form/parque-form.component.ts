@@ -1,87 +1,57 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
+import {Component, OnInit, Input, OnChanges, SimpleChanges, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 
 import { ParqueEolicoService } from '../../../../../core/crud/parque-eolico.service'
-import { ComplexoEolicoService } from '../../../../../core/crud/complexo-eolico.service'
 import { ParqueEolico } from '../../../../../core/modelos/parque-eolico.model'
-import { ComplexoEolico } from '../../../../../core/modelos/complexo-eolico.model.'
+import {ParqueEolicoSharedService} from '../../../../../core/services/parque-eolico-shared.service';
+import {ModalFormContentComponent} from '../../../../../shared/content/modal-form-content';
+import {Estados} from '../../../../../core/util/estados.util';
 
 @Component({
   selector: 'app-parque-form',
   templateUrl: './parque-form.component.html',
   styleUrls: ['./parque-form.component.scss']
 })
-export class ParqueFormComponent implements OnChanges {
+export class ParqueFormComponent extends ModalFormContentComponent implements OnChanges{
 
-  @Input() parque;
-  @Input() operation;
-  parques: ParqueEolico[];
-  complexos: ComplexoEolico[];
-  complexo: ComplexoEolico;
-  parqueForm: FormGroup;
-  isUpdate: boolean = false;
+  @ViewChild('modalParqueEolico') modalParqueEolico: TemplateRef<any>;
+  @ViewChild('form') form: any;
+  @Input() parqueEolico: ParqueEolico;
+  @Input() isUpdate = false;
+
+  estados: Array<any> = Estados;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private parqueService: ParqueEolicoService,
-    private complexoService: ComplexoEolicoService
-  ) { }
+    private _parqueEolicoSharedService: ParqueEolicoSharedService,
+    protected changeDetection: ChangeDetectorRef
+  ) {
+    super(changeDetection);
+  }
 
+  abrirModal() {
+    this.openModal(this.modalParqueEolico);
+  }
+  fecharModal() {
+    this.closeModal(this.modalParqueEolico)
+  }
 
-  onSubmit(): void {
-    //cadastro
-    if (!this.isUpdate) {      
-      this.parqueService.salvar(this.parqueForm.value)
-        .subscribe(data => {
-          window.alert("PARQUE CADASTRADO COM SUCESSO!")
-          location.reload();
-        })
-      //update  
+  persistirEntidade(form) {
+    if (form.invalid) {
+      return;
     } else {
-      console.log(this.parqueForm.value)
-      this.parqueForm.value.id = this.parque.id
-      this.parqueService.editar(this.parqueForm.value)
-        .subscribe(data => {
-          window.alert("PARQUE ATUALIZADO COM SUCESSO!")
-          location.reload();
-        })
+      this._parqueEolicoSharedService.emitChange(this.parqueEolico);
+      this.closeModal(this.modalParqueEolico);
     }
   }
 
-  ngOnChanges(change: SimpleChanges) {
-    if (this.operation) {
-      this.isUpdate = true
-      this.parqueForm = this.formBuilder.group({
-        nome: [this.parque.nome, Validators.required],
-        latitude: [this.parque.latitude],
-        longitude: [this.parque.longitude],
-        potencia_instalada: [this.parque.potencia_instalada],
-        complexoEolico: [this.parque.complexoEolico, Validators.required]
-      })
-    } else {
-      this.isUpdate = false
-      this.parqueForm = this.formBuilder.group({
-        nome: ['', Validators.required],
-        latitude: [''],
-        longitude: [''],
-        potencia_instalada: [''],
-        complexoEolico: ['', Validators.required],
-      })
-    }
+  executeAfterModalHide() {
+    this.parqueEolico = new ParqueEolico();
+    this.form.submitted = false;
   }
 
-  ngOnInit() {
-    this.complexoService.todos()
-      .subscribe(data => {
-        this.complexos = data;
-      })
-    this.parqueForm = this.formBuilder.group({
-      nome: ['', Validators.required],
-      latitude: [''],
-      longitude: [''],
-      potencia_instalada: [''],
-      complexoEolico: ['', Validators.required],
-    })
+  ngOnChanges(changes: SimpleChanges) {   
+   
   }
 
 }
+

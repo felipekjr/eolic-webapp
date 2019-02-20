@@ -31,6 +31,9 @@ export class ComplexoFormComponent extends ModalFormContentComponent implements 
   abrirModal() {
     this.openModal(this.modalComplexoEolico);
   }
+  fecharModal() {
+    this.closeModal(this.modalComplexoEolico)
+  }
 
   persistirEntidade(form) {
     if (form.invalid || !this.complexoEolico.uf) {
@@ -46,68 +49,9 @@ export class ComplexoFormComponent extends ModalFormContentComponent implements 
     this.form.submitted = false;
   }
 
-  ngOnChanges(change: SimpleChanges) {
-
+  ngOnChanges(changes: SimpleChanges) {   
+   
   }
 
 }
 
-
-// @Input() complexo;
-// @Input() operation;
-// complexos: ComplexoEolico[];
-// complexoForm: FormGroup;
-// isUpdate: boolean = false;
-//
-// constructor(
-//   private formBuilder: FormBuilder,
-//   private complexoEolicoShared: ComplexoEolicoService,
-//   private complexoEolicoSharedService : ComplexoEolicoSharedService
-// ) { }
-//
-//
-// onSubmit(): void {
-//   //cadastro
-//   if (!this.isUpdate) {
-//     this.complexoEolicoSharedService.emitChange(this.complexoForm.value);
-//     // this.complexoEolicoShared.salvar(this.complexoForm.value)
-//     //   .subscribe(data => {
-//     //     window.alert("COMPLEXO CADASTRADO COM SUCESSO!")
-//     //
-//     //   })
-//     //update
-//   } else {
-//     this.complexoForm.value.id = this.complexo.id
-//     this.complexoEolicoShared.editar(this.complexoForm.value)
-//       .subscribe(data => {
-//         window.alert("COMPLEXO ATUALIZADO COM SUCESSO!")
-//         location.reload();
-//       })
-//   }
-// }
-//
-// ngOnChanges(change: SimpleChanges) {
-//   if (this.operation) {
-//     this.isUpdate = true
-//     this.complexoForm = this.formBuilder.group({
-//       nome: [this.complexo.nome, Validators.required],
-//       uf: [this.complexo.uf],
-//       identificador: [this.complexo.identificador]
-//     })
-//   } else {
-//     this.isUpdate = false
-//     this.complexoForm = this.formBuilder.group({
-//       nome: ['', Validators.required],
-//       uf: ['',],
-//       identificador: ['',]
-//     })
-//   }
-// }
-//
-// ngOnInit() {
-//   this.complexoForm = this.formBuilder.group({
-//     nome: ['', Validators.required],
-//     uf: ['',],
-//     identificador: ['',]
-//   })
-// }

@@ -18,6 +18,7 @@ export class ComplexoEolicoService extends AbstractCrudService<ComplexoEolico>{
   ) {
     super(httpService)
   }
+  
   getChangeEmittedComplexoEolico(): Observable<any> {
     return this.complexoEolicoSharedService.changeEmitted$;
   }

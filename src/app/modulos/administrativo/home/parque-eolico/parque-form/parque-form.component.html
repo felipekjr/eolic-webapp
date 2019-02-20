@@ -1,43 +1,37 @@
-<!-- Modal -->
-<div class="modal fade" id="parqueModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div  bsModal #modalParqueEolico="bs-modal" class="modal fade" tabindex="-1"
+      role="dialog" aria-labelledby="dialog-sizes-name1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">PARQUE</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <p class="text-danger">*nome e complexo éolico obrigatório</p>
-        <form parque="ngForm" [formGroup]="parqueForm" (ngSubmit)="onSubmit()">
+      <modal-header [title]="parqueEolico.id ? 'Atualizar' : 'Cadastrar'" (clickCloseButton)="closeModal(modalParqueEolico)"></modal-header>
+      <div class="modal-body">       
+        <form #form="ngForm" (ngSubmit)="persistirEntidade(form)">
           <div class="form-group">
             <label for="nome">Nome</label>
-            <input type="text" formControlName="nome" class="form-control" />
+            <input type="text"  name="nome "class="form-control" [ngClass]="{'is-invalid': form.submitted && form.controls['nome'].invalid}"
+            [(ngModel)]="parqueEolico.nome" required/>
           </div>
           <div class="form-group">
             <label for="latitude">Latitude</label>
-            <input type="text" formControlName="latitude" class="form-control" />
+            <input type="text"  name="latitude "class="form-control" [ngClass]="{'is-invalid': form.submitted && form.controls['latitude'].invalid}"
+            [(ngModel)]="parqueEolico.latitude" required />
           </div>
           <div class="form-group">
             <label for="longitude">Longitude</label>
-            <input type="text" formControlName="longitude" class="form-control" />
+            <input type="text"  name="longitude "class="form-control" [ngClass]="{'is-invalid': form.submitted && form.controls['longitude'].invalid}"
+            [(ngModel)]="parqueEolico.longitude" required />
           </div>
           <div class="form-group">
-            <label for="potencia_instalada">Potencia Instalada</label>
-            <input type="text" formControlName="potencia_instalada" class="form-control" />
+            <label for="potenciaInstalada">Potencia Instalada</label>
+            <input type="text"  name="potenciaInstalada "class="form-control" [ngClass]="{'is-invalid': form.submitted && form.controls['potenciaInstalada'].invalid}"
+            [(ngModel)]="parqueEolico.potenciaInstalada" required />
           </div>
           <div class="form-group">
-            <label for="exampleFormControlSelect1">ID do ComplexoModel Eólico</label>
-            <select class="form-control" id="exampleFormControlSelect1" formControlName="complexoEolico">
+            <label for="exampleFormControlSelect1">ID do Complexo Eólico</label>
+            <select class="form-control" name="idComplexo"[ngClass]="{'is-invalid': form.submitted && form.controls['uf'].invalid}" [(ngModel)]="parqueEolico.complexoEolico" required>
               <option *ngFor="let complexo of complexos" [ngValue]="complexo">{{complexo.id}}</option>
             </select>
           </div>
-          <div class="form-group modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" [disabled]="loading" class="btn btn-primary" *ngIf="isUpdate">Atualizar</button>
-            <button type="submit" [disabled]="loading" class="btn btn-primary" *ngIf="!isUpdate">Cadastrar</button>
-          </div>
+          <modal-footer [formValid]="form.valid" [isUpdate]="isUpdate" (clickCloseButton)="closeModal(modalParqueEolico)"></modal-footer>
         </form>
       </div>
     </div>
