@@ -1,4 +1,15 @@
-import {Component, OnInit, Input, OnChanges, SimpleChanges, ViewChild, TemplateRef, ChangeDetectorRef} from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+  TemplateRef,
+  ChangeDetectorRef,
+  Output,
+  HostBinding
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 
 import { ParqueEolicoService } from '../../../../../core/crud/parque-eolico.service'
@@ -6,6 +17,7 @@ import { ParqueEolico } from '../../../../../core/modelos/parque-eolico.model'
 import {ParqueEolicoSharedService} from '../../../../../core/services/parque-eolico-shared.service';
 import {ModalFormContentComponent} from '../../../../../shared/content/modal-form-content';
 import {Estados} from '../../../../../core/util/estados.util';
+import {ComplexoEolico} from '../../../../../core/modelos/complexo-eolico.model.';
 
 @Component({
   selector: 'app-parque-form',
@@ -13,12 +25,11 @@ import {Estados} from '../../../../../core/util/estados.util';
   styleUrls: ['./parque-form.component.scss']
 })
 export class ParqueFormComponent extends ModalFormContentComponent implements OnChanges{
-
   @ViewChild('modalParqueEolico') modalParqueEolico: TemplateRef<any>;
   @ViewChild('form') form: any;
   @Input() parqueEolico: ParqueEolico;
-  @Input() isUpdate = false;
-
+  @Input() complexosEolicos: Array<ComplexoEolico> = [];
+  @Input() isUpdate;
   estados: Array<any> = Estados;
 
   constructor(
@@ -49,8 +60,8 @@ export class ParqueFormComponent extends ModalFormContentComponent implements On
     this.form.submitted = false;
   }
 
-  ngOnChanges(changes: SimpleChanges) {   
-   
+  ngOnChanges(changes: SimpleChanges) {
+
   }
 
 }

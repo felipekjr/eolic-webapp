@@ -12,7 +12,7 @@ import {Estados} from '../../../../../core/util/estados.util';
   templateUrl: './complexo-form.component.html',
   styleUrls: ['./complexo-form.component.scss']
 })
-export class ComplexoFormComponent extends ModalFormContentComponent implements OnChanges{
+export class ComplexoFormComponent extends ModalFormContentComponent implements OnInit{
 
   @ViewChild('modalComplexoEolico') modalComplexoEolico: TemplateRef<any>;
   @ViewChild('form') form: any;
@@ -49,8 +49,8 @@ export class ComplexoFormComponent extends ModalFormContentComponent implements 
     this.form.submitted = false;
   }
 
-  ngOnChanges(changes: SimpleChanges) {   
-   
+  ngOnInit() {
+    Validators.pattern(".*\\S.*[a-zA-z0-9 ]")
   }
 
 }

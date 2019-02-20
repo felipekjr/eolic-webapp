@@ -15,11 +15,8 @@ import {MensagemUtil} from '../../../../core/util/mensagem.util';
   styleUrls: ['./complexo-eolico.component.scss']
 })
 export class ComplexoEolicoComponent implements OnInit {
-  @Output() hasComplexo = new EventEmitter<boolean>();
-  @Output() parqueForDelete = new EventEmitter();
-  parqueDeletedConfirmed: boolean
 
-
+  @Output() complexosOutput = new EventEmitter<Array<ComplexoEolico>>();
   @ViewChild('modalComplexoEolico') modalComplexoEolico: any;  
   @ViewChild('form') form: any;
 
@@ -30,8 +27,6 @@ export class ComplexoEolicoComponent implements OnInit {
   parqueEolico: ParqueEolico = new ParqueEolico();
   complexoEolico: ComplexoEolico = new ComplexoEolico();
   complexosEolicos: Array<ComplexoEolico> = [];
-
-
 
   constructor(
     private complexoEolicoService: ComplexoEolicoService,
@@ -101,7 +96,8 @@ export class ComplexoEolicoComponent implements OnInit {
 
   private salvarEntidadeComplexoEolico(complexoEolicoRecebido: ComplexoEolico) {
     this.complexoEolicoService.salvar(complexoEolicoRecebido).subscribe(complexoEolico => {
-      this.complexosEolicos.push(complexoEolico);     
+      this.complexosEolicos.push(complexoEolico);
+      this.complexosOutput.emit(this.complexosEolicos)
     }, erro => {
       this.mensagemUtil.adicionarMensagensDeErro('geral.complexo_eolico', erro);
     });
@@ -111,7 +107,7 @@ export class ComplexoEolicoComponent implements OnInit {
   private buscarComplexosEolicos() {
     this.complexoEolicoService.todos().subscribe(complexosEolicos => {
       this.complexosEolicos = complexosEolicos;         
-      this.hasComplexo.emit(true)
+      this.complexosOutput.emit(this.complexosEolicos)
     }, erro => {
       this.mensagemUtil.adicionarMensagensDeErro('geral.complexo_eolico', erro);
     });

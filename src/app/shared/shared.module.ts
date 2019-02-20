@@ -4,9 +4,10 @@ import {ModalModule} from 'ngx-bootstrap';
 import {ModalHeaderModule} from './modal-header/modal-header.module';
 import {ModalFooterModule} from './modal-footer/modal-footer.module';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {NoWhitespaceDirective} from './diretivas/no-whitespace.directive';
 
 @NgModule({
-  declarations: [],
+  declarations: [NoWhitespaceDirective],
   imports: [
     CommonModule,
     ModalModule,
@@ -22,6 +23,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
     ModalFooterModule,
     FormsModule,
     ReactiveFormsModule,
+    NoWhitespaceDirective
   ]
 })
 export class SharedModule { }

@@ -5,9 +5,7 @@ import {HttpService} from './http/http.service';
 import {AuthenticationService} from './http/authentication.service';
 import {AuthGuard} from './guards/auth.guard';
 
-
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule
   ],

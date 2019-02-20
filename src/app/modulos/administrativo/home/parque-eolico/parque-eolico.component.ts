@@ -5,27 +5,23 @@ import {ParqueEolicoSharedService} from '../../../../core/services/parque-eolico
 import {Subscription} from 'rxjs';
 import {ParqueEolico} from '../../../../core/modelos/parque-eolico.model';
 import {MensagemUtil} from '../../../../core/util/mensagem.util';
+import {ComplexoEolico} from '../../../../core/modelos/complexo-eolico.model.';
 
 @Component({
   selector: 'app-parque-eolico',
   templateUrl: './parque-eolico.component.html',
   styleUrls: ['./parque-eolico.component.scss']
 })
-export class ParqueEolicoComponent implements OnInit {
-  @Input() hasComplexo
-  parqueDeletedConfirmed: boolean
-
-
+export class ParqueEolicoComponent implements OnInit, OnChanges {
   @ViewChild('modalParqueEolico') modalParqueEolico: any;
   @ViewChild('form') form: any;
-
+  @Input() complexosEolicos: Array<ComplexoEolico>;
+  @Output() parquesOutput = new EventEmitter<Array<ParqueEolico>>();
   private parqueEolicoSharedServiceSubscription: any;
   private idparqueEolico: number;
-
   isUpdate: boolean;
   parqueEolico: ParqueEolico = new ParqueEolico();
   parquesEolicos: Array<ParqueEolico> = [];
-
 
 
   constructor(
@@ -44,6 +40,10 @@ export class ParqueEolicoComponent implements OnInit {
           this.persistirEntidade(parqueEolicoRecebido);
         }
       });
+
+  }
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(this.complexosEolicos)
   }
 
   callbackBotaoEditarparque(parqueId: any) {
@@ -94,8 +94,10 @@ export class ParqueEolicoComponent implements OnInit {
   }
 
   private salvarEntidadeparqueEolico(parqueEolicoRecebido: ParqueEolico) {
+    console.table(parqueEolicoRecebido)
     this.parqueEolicoService.salvar(parqueEolicoRecebido).subscribe(parqueEolico => {
-      this.parquesEolicos.push(parqueEolico);     
+      this.parquesEolicos.push(parqueEolico);
+      this.parquesOutput.emit(this.parquesEolicos)
     }, erro => {
       this.mensagemUtil.adicionarMensagensDeErro('geral.parque_eolico', erro);
     });
@@ -104,7 +106,8 @@ export class ParqueEolicoComponent implements OnInit {
 
   private buscarparquesEolicos() {
     this.parqueEolicoService.todos().subscribe(parquesEolicos => {
-      this.parquesEolicos = parquesEolicos;     
+      this.parquesEolicos = parquesEolicos;
+      this.parquesOutput.emit(this.parquesEolicos)
     }, erro => {
       this.mensagemUtil.adicionarMensagensDeErro('geral.parque_eolico', erro);
     });

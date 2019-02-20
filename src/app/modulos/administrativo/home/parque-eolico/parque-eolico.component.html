@@ -10,16 +10,16 @@
         {{parqueEolico.nome}}
         <span>
           <i class="fas fa-edit" data-toggle="modal" data-target="#parqueModal" (click)="callbackBotaoEditarparque(parqueEolico.id)"></i>
-          <i class="fas fa-times-circle" (click)="callbackBotaoDeletarParque(parqueEolico.id)"></i>
+          <i class="fas fa-times-circle" (click)="callbackBotaoDeletarparque(parqueEolico.id)"></i>
         </span>
       </div>
 
     </li>
   </ul>
   <div class="card-footer">
-    <button type="button" [disabled]="!hasComplexo" class="btn btn-primary btn-block" data-toggle="modal" data-target="#parqueModal"
-      (click)="updateParque(null)">CADASTRAR</button>
+    <button type="button" [disabled]="complexosEolicos.length == 0" class="btn btn-primary btn-block" data-toggle="modal" data-target="#parqueModal"
+      (click)="callbackBotaoEditarparque()">CADASTRAR</button>
   </div>
 </div>
 
-<app-parque-form #modalParqueEolico [parqueEolico]="parqueEolico" [isUpdate]="isUpdate"></app-parque-form>
+<app-parque-form #modalParqueEolico [parqueEolico]="parqueEolico" [complexosEolicos]="complexosEolicos" [isUpdate]="isUpdate"></app-parque-form>

@@ -9,16 +9,16 @@
       <div class="d-flex justify-content-between ">
         {{aerogerador.nome}}
         <span>
-          <i class="fas fa-edit" data-toggle="modal" data-target="#aerogeradorModal" (click)="updateAerogerador(aerogerador)"></i>
-          <i class="fas fa-times-circle" (click)="deleteAerogerador(aerogerador)"></i>
+          <i class="fas fa-edit" (click)="callbackBotaoEditarComplexo(aerogerador.id)"></i>
+          <i class="fas fa-times-circle" (click)="callbackBotaoDeletarComplexo(aerogerador.id)"></i>
         </span>
       </div>
     </li>
   </ul>
   <div class="card-footer">
-    <button type="button" [disabled]="!hasParque" class="btn btn-primary btn-block" data-toggle="modal" data-target="#aerogeradorModal"
-      (click)="updateAerogerador(null)">CADASTRAR</button>
+    <button type="button" [disabled]="parquesEolicos.length == 0" class="btn btn-primary btn-block"
+      (click)="callbackBotaoEditarComplexo()">CADASTRAR</button>
   </div>
 </div>
 
-<app-aerogerador-form [aerogerador]="aerogeradorForUpdate" [operation]="isUpdate"></app-aerogerador-form>
+<app-aerogerador-form #modalAerogerador [parquesEolicos] = "parquesEolicos" [aerogerador]="aerogerador" [isUpdate]="isUpdate"></app-aerogerador-form>

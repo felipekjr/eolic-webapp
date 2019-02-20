@@ -9,7 +9,7 @@
       <div class="d-flex justify-content-between">
         {{complexoEolico.nome}}
         <span>
-          <i class="fas fa-edit" data-toggle="modal" data-target="#complexoModal" (click)="callbackBotaoEditarComplexo(complexoEolico.id)"></i>
+          <i class="fas fa-edit"  (click)="callbackBotaoEditarComplexo(complexoEolico.id)"></i>
           <i class="fas fa-times-circle" (click)="callbackBotaoDeletarComplexo(complexoEolico.id)"></i>
         </span>
       </div>

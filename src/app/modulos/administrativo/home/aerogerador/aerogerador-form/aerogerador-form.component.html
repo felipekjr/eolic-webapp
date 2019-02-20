@@ -1,51 +1,41 @@
-<!-- Modal -->
-<div class="modal fade" id="aerogeradorModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div bsModal #modalAerogerador="bs-modal" class="modal fade" tabindex="-1"
+     role="dialog" aria-labelledby="dialog-sizes-name1">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">AEROGERADOR</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
+      <modal-header [title]="aerogerador.id ? 'Atualizar' : 'Cadastrar'" (clickCloseButton)="closeModal(modalAerogerador)"></modal-header>
       <div class="modal-body">
-        <p class="text-danger">*nome e parque éolico obrigatório</p>
-        <form aerogerador="ngForm" [formGroup]="aerogeradorForm" (ngSubmit)="onSubmit()">
+        <form #form="ngForm" (ngSubmit)="persistirEntidade(form)">
           <div class="form-group">
             <label for="nome">Nome</label>
-            <input type="text" formControlName="nome" class="form-control" />
+            <input type="text" semEspacoBranco name="nome" class="form-control" [(ngModel)]="aerogerador.nome" required/>
           </div>
           <div class="form-group">
             <label for="latitude">Latitude</label>
-            <input type="text" formControlName="latitude" class="form-control" />
+            <input type="text" semEspacoBranco name="latitude" class="form-control" [(ngModel)]="aerogerador.latitude" required />
           </div>
           <div class="form-group">
             <label for="longitude">Longitude</label>
-            <input type="text" formControlName="longitude" class="form-control" />
+            <input type="text" semEspacoBranco name="longitude" class="form-control"  [(ngModel)]="aerogerador.longitude" required />
           </div>
           <div class="form-group">
             <label for="altura_torre">Altura da torre</label>
-            <input type="text" formControlName="altura_torre" class="form-control" />
+            <input type="text" semEspacoBranco name="alturaTorre" class="form-control"  [(ngModel)]="aerogerador.alturaTorre" required />
           </div>
           <div class="form-group">
             <label for="diametro_varredura">Diametro de varredura</label>
-            <input type="text" formControlName="diametro_varredura" class="form-control" />
+            <input type="text" semEspacoBranco name="diametroVarredura" class="form-control"  [(ngModel)]="aerogerador.diametroVarredura" required />
           </div>
           <div class="form-group">
             <label for="modelo">Modelo</label>
-            <input type="text" formControlName="modelo" class="form-control" />
+            <input type="text" semEspacoBranco name="modelo" class="form-control"  [(ngModel)]="aerogerador.modelo" required />
           </div>
           <div class="form-group">
-            <label for="exampleFormControlSelect1">ID do ParqueModel Eólico</label>
-            <select class="form-control" id="exampleFormControlSelect1" formControlName="parqueEolico">
-              <option *ngFor="let parque of parques" [ngValue]="parque">{{parque.id}}</option>
+            <label for="parquesEolico">Parque Eólico</label>
+            <select selected="selected" class="form-control"[ngClass]="{'is-invalid': form.submitted && form.controls['parqueEolico'].invalid}" name="parqueEolico"  [(ngModel)]="aerogerador.parqueEolico" required >
+              <option *ngFor="let parque of parquesEolicos" [ngValue]="parque">{{parque.nome}}</option>
             </select>
           </div>
-          <div class="form-group modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-            <button type="submit" [disabled]="loading" class="btn btn-primary" *ngIf="isUpdate">Atualizar</button>
-            <button type="submit" [disabled]="loading" class="btn btn-primary" *ngIf="!isUpdate">Cadastrar</button>
-          </div>
+          <modal-footer [formValid]="form.valid" [isUpdate]="isUpdate" (clickCloseButton)="closeModal(modalAerogerador)"></modal-footer>
         </form>
       </div>
     </div>
