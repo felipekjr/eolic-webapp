@@ -45,7 +45,9 @@ export class ParqueFormComponent extends ModalFormContentComponent implements On
   fecharModal() {
     this.closeModal(this.modalParqueEolico)
   }
-
+  compareInSelect(c1, c2): boolean {
+    return c1 && c2 ? c1.id === c2.id : c1 === c2;
+  }
   persistirEntidade(form) {
     if (form.invalid) {
       return;

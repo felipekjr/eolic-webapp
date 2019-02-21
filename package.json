@@ -1,5 +1,5 @@
 {
-  "name": "webapp",
+  "name": "EolicAdmin",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -21,6 +21,7 @@
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
     "@toverux/ngx-sweetalert2": "^4.0.0",
+    "animate.css": "^3.7.0",
     "bootstrap": "^4.3.1",
     "core-js": "^2.5.4",
     "express": "^4.16.4",

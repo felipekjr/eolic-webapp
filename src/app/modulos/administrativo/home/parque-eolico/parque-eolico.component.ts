@@ -12,7 +12,7 @@ import {ComplexoEolico} from '../../../../core/modelos/complexo-eolico.model.';
   templateUrl: './parque-eolico.component.html',
   styleUrls: ['./parque-eolico.component.scss']
 })
-export class ParqueEolicoComponent implements OnInit, OnChanges {
+export class ParqueEolicoComponent implements OnInit {
   @ViewChild('modalParqueEolico') modalParqueEolico: any;
   @ViewChild('form') form: any;
   @Input() complexosEolicos: Array<ComplexoEolico>;
@@ -22,7 +22,7 @@ export class ParqueEolicoComponent implements OnInit, OnChanges {
   isUpdate: boolean;
   parqueEolico: ParqueEolico = new ParqueEolico();
   parquesEolicos: Array<ParqueEolico> = [];
-
+  modalOpen = false
 
   constructor(
     private parqueEolicoService: ParqueEolicoService,    
@@ -41,9 +41,6 @@ export class ParqueEolicoComponent implements OnInit, OnChanges {
         }
       });
 
-  }
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(this.complexosEolicos)
   }
 
   callbackBotaoEditarparque(parqueId: any) {
@@ -94,7 +91,6 @@ export class ParqueEolicoComponent implements OnInit, OnChanges {
   }
 
   private salvarEntidadeparqueEolico(parqueEolicoRecebido: ParqueEolico) {
-    console.table(parqueEolicoRecebido)
     this.parqueEolicoService.salvar(parqueEolicoRecebido).subscribe(parqueEolico => {
       this.parquesEolicos.push(parqueEolico);
       this.parquesOutput.emit(this.parquesEolicos)

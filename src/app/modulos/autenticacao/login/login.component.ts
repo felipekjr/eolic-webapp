@@ -1,42 +1,52 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { AuthenticationService } from '../../../core/http/authentication.service'
-import { UserService } from '../../../core/crud/user.service'
-import { Usuario } from '../../../core/modelos/usuario.model'
-import { AuthGuard } from '../../../core/guards/auth.guard';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {AuthenticationService} from '../../../core/http/authentication.service';
+import {UserService} from '../../../core/crud/user.service';
+import {Usuario} from '../../../core/modelos/usuario.model';
+import {AuthGuard} from '../../../core/guards/auth.guard';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
-    selector: 'app-login',
-    templateUrl: './login.component.html',
-    styleUrls: ['./login.component.scss']
+  selector: 'app-login',
+  templateUrl: './login.component.html',
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-    loginForm: FormGroup;
-    hasParametrosLogin: boolean;
-    constructor(
-        private formBuilder: FormBuilder,
-        private route: ActivatedRoute,
-        private router: Router,
-        private authenticationService: AuthenticationService,
-        private userService: UserService,
-        private authGuard: AuthGuard
-    ) { }
+  loginForm: FormGroup;
+  hasParametrosLogin: boolean;
 
-    // get para pegar os campos do form
-    get login() { return this.loginForm.get('login')}
-    get senha() { return this.loginForm.get('senha')}
+  constructor(
+    private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router,
+    private authenticationService: AuthenticationService,
+    private userService: UserService,
+    private authGuard: AuthGuard
+  ) {
+  }
 
-    entrarNoSistema() {
-        this.authenticationService.entrar(this.login.value, this.senha.value);
-    }
+  // get para pegar os campos do form
+  get login() {
+    return this.loginForm.get('login');
+  }
 
-    ngOnInit() {
-        this.loginForm = this.formBuilder.group({
-            login: ['', Validators.required],
-            senha: ['', Validators.required]
-        });
-        this.authenticationService.sair();
-        this.hasParametrosLogin = false;
-    }
+  get senha() {
+    return this.loginForm.get('senha');
+  }
+
+  entrarNoSistema() {
+    this.authenticationService.entrar(this.login.value, this.senha.value);
+  }
+
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      login: ['', Validators.required],
+      senha: ['', Validators.required]
+    });
+    this.authenticationService.sair();
+    this.route.params.subscribe(params => {
+      console.log('New route params');
+    })
+    this.hasParametrosLogin = false;
+  }
 }

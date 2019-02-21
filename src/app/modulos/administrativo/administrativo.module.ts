@@ -17,8 +17,8 @@ import {ComplexoEolicoSharedService} from '../../core/services/complexo-eolico-s
 import {ModalModule} from 'ngx-bootstrap';
 import {ComplexoEolicoService} from '../../core/crud/complexo-eolico.service';
 import {SharedModule} from '../../shared/shared.module';
-import {ModalHeaderModule} from '../../shared/modal-header/modal-header.module';
-import {ModalFooterModule} from '../../shared/modal-footer/modal-footer.module';
+import {ModalHeaderModule} from '../../shared/componentes/modal-header/modal-header.module';
+import {ModalFooterModule} from '../../shared/componentes/modal-footer/modal-footer.module';
 import { ParqueEolicoService } from '../../core/crud/parque-eolico.service';
 import { ParqueEolicoSharedService } from '../../core/services/parque-eolico-shared.service';
 import {AerogeradorService} from '../../core/crud/aerogerador.service';

@@ -2,7 +2,7 @@
  * Created by Gustavo Galvao on 16/07/2018.
  */
 import {Injectable} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
 import {isNullOrUndefined} from 'util';
 import {HttpService} from './http.service';
@@ -10,6 +10,7 @@ import {environment} from '../../../environments/environment';
 import {MensagemUtil} from '../util/mensagem.util';
 import {Usuario, UsuarioBuilder} from '../modelos/usuario.model';
 import {Observable, Subject} from 'rxjs';
+import {isNull} from '@angular/compiler/src/output/output_ast';
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class AuthenticationService {
 
   private _usuarioLogado: Usuario;
 
-  constructor(private httpService: HttpService, private router: Router, private mensagemUtil: MensagemUtil) {
+  constructor(private httpService: HttpService, private router: Router, private activeRoute : ActivatedRoute, private mensagemUtil: MensagemUtil) {
     this.carregarUsuario();
   }
 
@@ -47,7 +48,6 @@ export class AuthenticationService {
     }, erro => {
       senha = '';
       this.mensagemUtil.adicionarMensagensDeErro("Login", erro)
-
     });
   }
 
@@ -60,7 +60,8 @@ export class AuthenticationService {
   }
 
   public isLogged(): boolean {
-    return !isNullOrUndefined(this._usuarioLogado);
+   return isNullOrUndefined(this._usuarioLogado)
+
   }
 
   get usuarioLogado(): Usuario {

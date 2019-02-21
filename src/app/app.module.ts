@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
 import {AppRoutingModule} from './app-routing.module';
@@ -12,12 +11,6 @@ import {SweetAlert2Module} from '@toverux/ngx-sweetalert2'
 import {CoreModule} from './core/core.module';
 import {ModalModule} from 'ngx-bootstrap';
 
-import {AutenticacaoModule} from './modulos/autenticacao/autenticacao.module';
-import {AdministrativoModule} from './modulos/administrativo/administrativo.module';
-
-import {AuthGuard} from './core/guards/auth.guard';
-import {AuthenticationService} from './core/http/authentication.service';
-import {HttpService} from './core/http/http.service';
 
 @NgModule({
   declarations: [

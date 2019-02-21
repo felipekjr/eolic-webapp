@@ -7,7 +7,8 @@ import {NgModule} from '@angular/core';
   imports: [RouterModule.forRoot([
     {
       path: 'administrativo',
-      loadChildren: './modulos/administrativo/administrativo.module#AdministrativoModule'
+      loadChildren: './modulos/administrativo/administrativo.module#AdministrativoModule',
+      canActivate: [AuthGuard]
     },
     {
       path: 'login',

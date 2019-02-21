@@ -22,24 +22,15 @@ export class HomeComponent implements OnInit {
   parquesEolicos: Array<ParqueEolico> = [];
 
   constructor(
-    private mensagemUtil : MensagemUtil,
-    private authenticationService : AuthenticationService
   ) { }
 
   hasComplexosEolicos(event){
-    event.length > 0 ? this.complexosEolicos = event : this.complexosEolicos = []
-    console.log(this.complexosEolicos)
+    event.length > 0 ? this.complexosEolicos = event : this.complexosEolicos = [];
   }
   hasParquesEolicos(event){
     event.length > 0 ? this.parquesEolicos = event : this.parquesEolicos = [];
-
+  }
+  ngOnInit(): void {
   }
 
-
-  ngOnInit() {
-    setTimeout(
-      () => this.mensagemUtil.adicionarMesagemBemVindo("Bem vindo " + `${this.authenticationService.usuarioLogado.login}` + "!"),
-      500
-    )
-  }
 }

@@ -7,7 +7,6 @@ import {AuthGuard} from '../../core/guards/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    canActivate: [AuthGuard],
     component: AdministrativoComponent,
     children: [
       {

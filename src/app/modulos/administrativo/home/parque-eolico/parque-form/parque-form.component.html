@@ -11,20 +11,20 @@
           </div>
           <div class="form-group">
             <label for="latitude">Latitude</label>
-            <input type="text" semEspacoBranco name="latitude "class="form-control" [(ngModel)]="parqueEolico.latitude" required />
+            <input type="text"  onlyNumber name="latitude "class="form-control" [(ngModel)]="parqueEolico.latitude"/>
           </div>
           <div class="form-group">
             <label for="longitude">Longitude</label>
-            <input type="text" semEspacoBranco name="longitude "class="form-control" [(ngModel)]="parqueEolico.longitude" required />
+            <input type="text" onlyNumber name="longitude "class="form-control" [(ngModel)]="parqueEolico.longitude" />
           </div>
           <div class="form-group">
             <label for="potenciaInstalada">Potencia Instalada</label>
-            <input type="text" semEspacoBranco name="potenciaInstalada "class="form-control"[(ngModel)]="parqueEolico.potenciaInstalada" required />
+            <input type="text" onlyNumber semEspacoBranco name="potenciaInstalada "class="form-control"[(ngModel)]="parqueEolico.potenciaInstalada" required />
           </div>
           <div class="form-group">
-            <label for="exampleFormControlSelect1">Complexo Eólico</label>
-            <select  selected="selected"class="form-control" name="idComplexo" [(ngModel)]="parqueEolico.complexoEolico" required>
-              <option *ngFor="let complexo of complexosEolicos" [ngValue]="complexo">{{complexo.nome}}</option>
+            <label for="complexoEolico">Complexo Eólico</label>
+            <select  [compareWith]="compareInSelect"  class="form-control" name="complexoEolico" [(ngModel)]="parqueEolico.complexoEolico" required>
+              <option *ngFor="let complexo of complexosEolicos" [ngValue]="complexo" >{{complexo.nome}}</option>
             </select>
           </div>
           <modal-footer [formValid]="form.valid" [isUpdate]="isUpdate" (clickCloseButton)="closeModal(modalParqueEolico)"></modal-footer>

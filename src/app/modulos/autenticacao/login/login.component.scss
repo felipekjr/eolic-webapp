@@ -1,6 +1,17 @@
 #loginBox{    
     padding: 50px;
     border-radius: 10px;
+  .form-group{
+    animation-delay: 500ms;
+    animation-duration: 500ms;
+  }
+}
+#brandBox{
+  animation-duration: 3s;
+  animation-delay: 1s;
+}
+h2 {
+  color: #1265E0
 }
 .row{
     height: 100vh;
