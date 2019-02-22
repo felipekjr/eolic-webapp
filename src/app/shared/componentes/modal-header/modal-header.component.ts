@@ -4,7 +4,8 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
   selector: 'modal-header',
   templateUrl: './modal-header.component.html'
 })
-export class ModalHeaderComponent {  @Input() title: string;
+export class ModalHeaderComponent {
+  @Input() title: string;
   @Output() clickCloseButton: EventEmitter<any> = new EventEmitter();
 
   constructor() {}

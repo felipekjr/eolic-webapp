@@ -1,12 +1,7 @@
-import { Directive, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { Validator, AbstractControl, Validators, NG_VALIDATORS } from '@angular/forms';
-import {isValid} from 'ngx-bootstrap/chronos/create/valid';
-
-
+import { Directive } from '@angular/core';
+import { Validator, AbstractControl,  NG_VALIDATORS } from '@angular/forms';
 
 /**
- * This validator works like "required" but it does not allow whitespace either
- *
  * @export
  * @class OnlyNumber
  * @implements {Validator}
@@ -20,6 +15,8 @@ export class OnlyNumberDirective implements Validator {
   float = /^[+-]?\d+(\.\d+)?$/;
   validate(control: AbstractControl): { [key: string]: any } {
     if(!isNaN(control.value)) {
+      return null
+    }else if(/\S/.test(control.value)){
       return null
     }
     else{

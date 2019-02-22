@@ -8,17 +8,20 @@ import {Usuario} from '../../core/modelos/usuario.model';
   templateUrl: './administrativo.component.html'
 })
 export class AdministrativoComponent implements OnInit {
-  usuarioLogado : Usuario
+  usuarioLogado: Usuario
   constructor(
     private mensagemUtil : MensagemUtil,
     private authenticationService : AuthenticationService
-  ) { }
+  ) {
+   this.usuarioLogado = this.authenticationService.usuarioLogado
+  }
 
   ngOnInit() {
-    setTimeout(
-      () => this.mensagemUtil.adicionarMesagemBemVindo("Bem vindo " + `${this.authenticationService.usuarioLogado.login}` + "!"),
-      500
-    )
+    setTimeout(() => {
+      if(this.authenticationService.isLogged()){
+        this.mensagemUtil.adicionarMesagemBemVindo("Bem vindo " + `${this.usuarioLogado.login}` + "!")
+      }
+    }, 500)
   }
 
 }

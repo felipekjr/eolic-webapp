@@ -1,7 +1,7 @@
 <div class="container-fluid">
     <div class="row" id="homeContainer">
         <app-complexo-eolico class="col-xs-12 col-md-4" (complexosOutput)="hasComplexosEolicos($event)"></app-complexo-eolico>
-        <app-parque-eolico class="col-xs-12 col-md-4" [complexosEolicos] = complexosEolicos (parquesOutput)="hasParquesEolicos($event)" ></app-parque-eolico>
+        <app-parque-eolico class=" col-xs-12 col-md-4" [complexosEolicos] = complexosEolicos (parquesOutput)="hasParquesEolicos($event)" ></app-parque-eolico>
         <app-aerogerador class="col-xs-12 col-md-4" [parquesEolicos] = parquesEolicos></app-aerogerador>
     </div>    
 </div>

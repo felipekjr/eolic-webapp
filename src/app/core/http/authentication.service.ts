@@ -18,7 +18,7 @@ import {isNull} from '@angular/compiler/src/output/output_ast';
 export class AuthenticationService {
 
   private aoEntrarEvento: Subject<Usuario> = new Subject();
-  private aoSairEvento: Subject<Usuario> = new Subject();
+  public aoSairEvento: Subject<Usuario> = new Subject();
   private aoEntrarErroEvento: Subject<string> = new Subject();
 
   private _usuarioLogado: Usuario;
@@ -51,17 +51,12 @@ export class AuthenticationService {
     });
   }
 
-  public sair(): void {
-    const usuario = this._usuarioLogado;
-    localStorage.clear();
-    this._usuarioLogado = null;
-    this.aoSairEvento.next(usuario);
-    this.router.navigateByUrl('/login');
+  private isNullOrUndefined<T>(obj: T | null | undefined): obj is null | undefined {
+    return typeof obj === "undefined" || obj === null;
   }
 
   public isLogged(): boolean {
-   return isNullOrUndefined(this._usuarioLogado)
-
+   return !this.isNullOrUndefined(this._usuarioLogado)
   }
 
   get usuarioLogado(): Usuario {
@@ -86,6 +81,14 @@ export class AuthenticationService {
       .comID(response.id)
       .comLogin(response.login)
       .construir();
+  }
+
+  public sair(): void {
+    const usuario = this._usuarioLogado;
+    localStorage.clear();
+    this._usuarioLogado = null;
+    this.aoSairEvento.next(usuario);
+    this.router.navigateByUrl('/login');
   }
 
 }

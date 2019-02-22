@@ -8,20 +8,23 @@
         <form #form="ngForm" (ngSubmit)="persistirEntidade(form)">
           <div class="form-group">
             <label for="nome">Nome:</label>
-            <input type="text" semEspacoBranco name="nome "class="form-control" [(ngModel)]="complexoEolico.nome" required />
+            <input type="text" name="nome" semEspacoBranco class="form-control" [(ngModel)]="complexoEolico.nome" [ngClass]="{'is-invalid': form.submitted && form.controls['nome'].invalid}" required/>
+            <span *ngIf="form.submitted &&  form.controls['nome'].invalid" class="text-danger">*Preencha o nome corretamente</span>
           </div>
           <div class="form-group">
             <label for="identificador">Identificador:</label>
-            <input type="text" semEspacoBranco name="identificador" class="form-control"[ngClass]="{'is-invalid': form.submitted && form.controls['identificador'].invalid}"
-                   [(ngModel)]="complexoEolico.identificador" required/>
+            <input type="text" semEspacoBranco name="identificador" class="form-control"
+                   [(ngModel)]="complexoEolico.identificador"  [ngClass]="{'is-invalid': form.submitted && form.controls['identificador'].invalid}" required/>
+            <span *ngIf="form.submitted &&  form.controls['identificador'].invalid" class="text-danger">*Preencha o identificador corretamente</span>
           </div>
           <div class="form-group">
             <label for="uf">UF:</label>
-            <select  selected="selected" name="uf" class="form-control"[ngClass]="{'is-invalid': form.submitted && form.controls['uf'].invalid}" [(ngModel)]="complexoEolico.uf" required>
+            <select selected="selected" name="uf" class="form-control" [(ngModel)]="complexoEolico.uf" [ngClass]="{'is-invalid': form.submitted && form.controls['uf'].invalid}"  required>
               <option *ngFor="let estado of estados">{{estado}}</option>
             </select>
-          </div>        
-          <modal-footer [formValid]="form.valid" [isUpdate]="isUpdate" (clickCloseButton)="closeModal(modalComplexoEolico)"></modal-footer>
+            <span *ngIf="form.submitted &&  form.controls['uf'].invalid" class="text-danger">*Preencha a uf</span>
+          </div>
+          <modal-footer [formValid]="true" [isUpdate]="isUpdate" (clickCloseButton)="closeModal(modalComplexoEolico)"></modal-footer>
         </form>
       </div>
     </div>

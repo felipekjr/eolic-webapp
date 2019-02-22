@@ -24,7 +24,7 @@ import {ComplexoEolico} from '../../../../../core/modelos/complexo-eolico.model.
   templateUrl: './parque-form.component.html',
   styleUrls: ['./parque-form.component.scss']
 })
-export class ParqueFormComponent extends ModalFormContentComponent implements OnChanges{
+export class ParqueFormComponent extends ModalFormContentComponent implements OnInit{
   @ViewChild('modalParqueEolico') modalParqueEolico: TemplateRef<any>;
   @ViewChild('form') form: any;
   @Input() parqueEolico: ParqueEolico;
@@ -62,8 +62,10 @@ export class ParqueFormComponent extends ModalFormContentComponent implements On
     this.form.submitted = false;
   }
 
-  ngOnChanges(changes: SimpleChanges) {
-
+  ngOnInit() {
+    this.parqueEolico = new ParqueEolico();
+    this.form.submitted = false;
+    Validators.pattern(".*\\S.*[a-zA-z0-9 ]")
   }
 
 }

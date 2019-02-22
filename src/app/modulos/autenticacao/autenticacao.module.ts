@@ -7,6 +7,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AuthGuard} from '../../core/guards/auth.guard';
 import {AuthenticationService} from '../../core/http/authentication.service';
 import {HttpService} from '../../core/http/http.service';
+import {SharedModule} from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import {HttpService} from '../../core/http/http.service';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    AutenticacaoRoutingModule
+    AutenticacaoRoutingModule,
+    SharedModule
   ],
   providers:[
     AuthGuard,

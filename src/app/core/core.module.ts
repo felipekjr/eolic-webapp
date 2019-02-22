@@ -4,6 +4,7 @@ import {throwIfAlreadyLoaded} from './module-import-guard';
 import {HttpService} from './http/http.service';
 import {AuthenticationService} from './http/authentication.service';
 import {AuthGuard} from './guards/auth.guard';
+import {TranslationService} from 'angular-l10n';
 
 @NgModule({
   imports: [
@@ -12,7 +13,8 @@ import {AuthGuard} from './guards/auth.guard';
   providers: [
     HttpService,
     AuthenticationService,
-    AuthGuard
+    AuthGuard,
+    TranslationService
   ]
 })
 export class CoreModule {

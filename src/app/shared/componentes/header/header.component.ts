@@ -12,7 +12,9 @@ export class HeaderComponent implements OnInit {
     private authenticationService : AuthenticationService
   ) { }
   logOut(){
-     this.authenticationService.sair()
+    this.authenticationService.aoSairEvento.next(this.usuarioLogado)
+    this.authenticationService.aoSair()
+    this.authenticationService.sair()
   }
   ngOnInit() {
   }

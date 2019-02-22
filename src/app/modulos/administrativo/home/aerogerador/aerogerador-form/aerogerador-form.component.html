@@ -7,35 +7,42 @@
         <form #form="ngForm" (ngSubmit)="persistirEntidade(form)">
           <div class="form-group">
             <label for="nome">Nome</label>
-            <input type="text" semEspacoBranco name="nome" class="form-control" [(ngModel)]="aerogerador.nome" required/>
+            <input type="text" semEspacoBranco name="nome" class="form-control" [(ngModel)]="aerogerador.nome" [ngClass]="{'is-invalid': form.submitted && form.controls['nome'].invalid}" required/>
+              <span *ngIf="form.submitted &&  form.controls['nome'].invalid" class="text-danger">*Preencha o nome corretamente</span>
           </div>
           <div class="form-group">
             <label for="latitude">Latitude</label>
-            <input type="text" onlyNumber semEspacoBranco name="latitude" class="form-control" [(ngModel)]="aerogerador.latitude" />
+            <input type="number" name="latitude" class="form-control" [(ngModel)]="aerogerador.latitude" [ngClass]="{'is-invalid': form.submitted && form.controls['latitude'].invalid}"/>
+              <span *ngIf="form.submitted &&  form.controls['latitude'].invalid" class="text-danger">*Preencha a latitude corretamente</span>
           </div>
           <div class="form-group">
             <label for="longitude">Longitude</label>
-            <input type="text" onlyNumber semEspacoBranco name="longitude" class="form-control"  [(ngModel)]="aerogerador.longitude" />
+            <input type="number"  name="longitude" class="form-control"  [(ngModel)]="aerogerador.longitude" [ngClass]="{'is-invalid': form.submitted && form.controls['longitude'].invalid}" />
+              <span *ngIf="form.submitted &&  form.controls['longitude'].invalid" class="text-danger">*Preencha a longitude corretamente</span>
           </div>
           <div class="form-group">
             <label for="altura_torre">Altura da torre</label>
-            <input type="text" onlyNumber semEspacoBranco name="alturaTorre" class="form-control"  [(ngModel)]="aerogerador.alturaTorre" />
+            <input type="number" name="alturaTorre" class="form-control"  [(ngModel)]="aerogerador.alturaTorre" [ngClass]="{'is-invalid': form.submitted && form.controls['alturaTorre'].invalid}"/>
+              <span *ngIf="form.submitted &&  form.controls['alturaTorre'].invalid" class="text-danger">*Preencha altura corretamente</span>
           </div>
           <div class="form-group">
             <label for="diametro_varredura">Diametro de varredura</label>
-            <input type="text" onlyNumber semEspacoBranco name="diametroVarredura" class="form-control"  [(ngModel)]="aerogerador.diametroVarredura"  />
+            <input type="number" name="diametroVarredura" class="form-control"  [(ngModel)]="aerogerador.diametroVarredura" [ngClass]="{'is-invalid': form.submitted && form.controls['diametroVarredura'].invalid}"  />
+              <span *ngIf="form.submitted &&  form.controls['diametroVarredura'].invalid" class="text-danger">*Preencha o diametro corretamente</span>
           </div>
           <div class="form-group">
             <label for="modelo">Modelo</label>
-            <input type="text" semEspacoBranco name="modelo" class="form-control"  [(ngModel)]="aerogerador.modelo" required />
+            <input type="text" semEspacoBranco name="modelo" class="form-control" [(ngModel)]="aerogerador.modelo" [ngClass]="{'is-invalid': form.submitted && form.controls['modelo'].invalid}" required />
+              <span *ngIf="form.submitted &&  form.controls['modelo'].invalid" class="text-danger">*Preencha o modelo corretamente</span>
           </div>
           <div class="form-group">
             <label for="parquesEolico">Parque Eólico</label>
-            <select  [compareWith]="compareInSelect"class="form-control" name="parqueEolico"  [(ngModel)]="aerogerador.parqueEolico" required >
+            <select [compareWith]="compareInSelect"class="form-control" name="parqueEolico"  [(ngModel)]="aerogerador.parqueEolico" [ngClass]="{'is-invalid': form.submitted && form.controls['parqueEolico'].invalid}" required >
               <option *ngFor="let parque of parquesEolicos" [ngValue]="parque">{{parque.nome}}</option>
             </select>
+            <span *ngIf="form.submitted &&  form.controls['parqueEolico'].invalid" class="text-danger">*Escolha o parque</span>
           </div>
-          <modal-footer [formValid]="form.valid" [isUpdate]="isUpdate" (clickCloseButton)="closeModal(modalAerogerador)"></modal-footer>
+          <modal-footer [formValid]="true" [isUpdate]="isUpdate" (clickCloseButton)="closeModal(modalAerogerador)"></modal-footer>
         </form>
       </div>
     </div>

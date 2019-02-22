@@ -14,7 +14,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   hasParametrosLogin: boolean;
-
+  msgErroLogin : string;
   constructor(
     private formBuilder: FormBuilder,
     private route: ActivatedRoute,
@@ -39,14 +39,14 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.authenticationService.aoEntrarErro().subscribe(erro => {
+      this.msgErroLogin = erro;
+    });
     this.loginForm = this.formBuilder.group({
       login: ['', Validators.required],
       senha: ['', Validators.required]
     });
     this.authenticationService.sair();
-    this.route.params.subscribe(params => {
-      console.log('New route params');
-    })
     this.hasParametrosLogin = false;
   }
 }

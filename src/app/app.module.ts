@@ -10,6 +10,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {SweetAlert2Module} from '@toverux/ngx-sweetalert2'
 import {CoreModule} from './core/core.module';
 import {ModalModule} from 'ngx-bootstrap';
+import {L10nLoader, TranslationModule} from 'angular-l10n';
+import {l10nConfig} from '../assets/locale/l10nConfig';
 
 
 @NgModule({
@@ -25,10 +27,17 @@ import {ModalModule} from 'ngx-bootstrap';
     ModalModule.forRoot(),
     SweetAlert2Module.forRoot(),
     ToastrModule.forRoot({
+      timeOut: 5000,
       preventDuplicates: true,
-    })
+    }),
+    TranslationModule.forRoot(l10nConfig)
   ],
   bootstrap: [AppComponent]
 })
 
-export class AppModule { }
+export class AppModule {
+  constructor(public l10nLoader: L10nLoader) {
+    this.l10nLoader.load();
+  }
+
+}

@@ -50,6 +50,8 @@ export class ComplexoFormComponent extends ModalFormContentComponent implements 
   }
 
   ngOnInit() {
+    this.complexoEolico = new ComplexoEolico();
+    this.form.submitted = false;
     Validators.pattern(".*\\S.*[a-zA-z0-9 ]")
   }
 
