@@ -7,7 +7,7 @@
         <form #form="ngForm" (ngSubmit)="persistirEntidade(form)">
           <div class="form-group">
             <label for="nome">Nome</label>
-            <input type="text" semEspacoBranco name="nome" class="form-control" [(ngModel)]="aerogerador.nome" [ngClass]="{'is-invalid': form.submitted && form.controls['nome'].invalid}" required/>
+            <input type="text" maxlength="30" semEspacoBranco name="nome" class="form-control" [(ngModel)]="aerogerador.nome" [ngClass]="{'is-invalid': form.submitted && form.controls['nome'].invalid}" required/>
               <span *ngIf="form.submitted &&  form.controls['nome'].invalid" class="text-danger">*Preencha o nome corretamente</span>
           </div>
           <div class="form-group">
@@ -38,6 +38,7 @@
           <div class="form-group">
             <label for="parquesEolico">Parque Eólico</label>
             <select [compareWith]="compareInSelect"class="form-control" name="parqueEolico"  [(ngModel)]="aerogerador.parqueEolico" [ngClass]="{'is-invalid': form.submitted && form.controls['parqueEolico'].invalid}" required >
+              <option value="">--</option>
               <option *ngFor="let parque of parquesEolicos" [ngValue]="parque">{{parque.nome}}</option>
             </select>
             <span *ngIf="form.submitted &&  form.controls['parqueEolico'].invalid" class="text-danger">*Escolha o parque</span>

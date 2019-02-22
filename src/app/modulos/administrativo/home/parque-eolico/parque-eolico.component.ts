@@ -91,6 +91,8 @@ export class ParqueEolicoComponent implements OnInit {
   }
 
   private salvarEntidadeparqueEolico(parqueEolicoRecebido: ParqueEolico) {
+    console.log(this.complexosEolicos)
+    console.log(parqueEolicoRecebido)
     this.parqueEolicoService.salvar(parqueEolicoRecebido).subscribe(parqueEolico => {
       this.parquesEolicos.push(parqueEolico);
       this.parquesOutput.emit(this.parquesEolicos)

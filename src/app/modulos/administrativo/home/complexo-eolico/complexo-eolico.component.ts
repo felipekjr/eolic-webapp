@@ -69,7 +69,8 @@ export class ComplexoEolicoComponent implements OnInit {
     const complexoEolicoIndex: number = thisComponent.complexosEolicos.findIndex(
           complexoEolico => complexoEolico.id === event);
     thisComponent.complexoEolicoService.deletar(event).subscribe(() => {
-      thisComponent.complexosEolicos.splice(complexoEolicoIndex, 1);    
+      thisComponent.complexosEolicos.splice(complexoEolicoIndex, 1);
+      this.complexosOutput.emit(this.complexosEolicos);
       thisComponent.mensagemUtil.adicionarMesagemSucesso('geral.complexo_eolico');  
       }, erro => {
           thisComponent.mensagemUtil.adicionarMensagensDeErro('geral.complexo_eolico', erro);
@@ -88,7 +89,7 @@ export class ComplexoEolicoComponent implements OnInit {
     this.complexoEolicoService.editar(complexoEolicoRecebido).subscribe(complexoEolicoCadastrado => {
       const complexoEolicoIndex: number = this.complexosEolicos.findIndex(
         complexoEolico => complexoEolico.id === complexoEolicoRecebido.id);      
-      this.complexosEolicos[complexoEolicoIndex] = complexoEolicoCadastrado;     
+      this.complexosEolicos[complexoEolicoIndex] = complexoEolicoCadastrado;
     }, erro => {
       this.mensagemUtil.adicionarMensagensDeErro('geral.complexo_eolico', erro);
     });

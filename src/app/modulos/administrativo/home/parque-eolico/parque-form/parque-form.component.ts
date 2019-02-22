@@ -18,6 +18,9 @@ import {ParqueEolicoSharedService} from '../../../../../core/services/parque-eol
 import {ModalFormContentComponent} from '../../../../../shared/content/modal-form-content';
 import {Estados} from '../../../../../core/util/estados.util';
 import {ComplexoEolico} from '../../../../../core/modelos/complexo-eolico.model.';
+import {ComplexoEolicoService} from '../../../../../core/crud/complexo-eolico.service';
+import {MensagemUtil} from '../../../../../core/util/mensagem.util';
+import {ComplexoEolicoSharedService} from '../../../../../core/services/complexo-eolico-shared.service';
 
 @Component({
   selector: 'app-parque-form',
@@ -34,7 +37,9 @@ export class ParqueFormComponent extends ModalFormContentComponent implements On
 
   constructor(
     private _parqueEolicoSharedService: ParqueEolicoSharedService,
-    protected changeDetection: ChangeDetectorRef
+    protected changeDetection: ChangeDetectorRef,
+    private complexoEolicoSharedService : ComplexoEolicoSharedService,
+    private mensagemUtil: MensagemUtil
   ) {
     super(changeDetection);
   }
@@ -65,8 +70,11 @@ export class ParqueFormComponent extends ModalFormContentComponent implements On
   ngOnInit() {
     this.parqueEolico = new ParqueEolico();
     this.form.submitted = false;
+    this.complexosEolicos = new Array<ComplexoEolico>()
     Validators.pattern(".*\\S.*[a-zA-z0-9 ]")
   }
+
+
 
 }
 

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, Input, OnChanges, OnInit, SimpleChanges, ViewChild} from '@angular/core';
 import { ComplexoEolicoComponent } from './/complexo-eolico/complexo-eolico.component'
 import { ParqueEolicoComponent } from './parque-eolico/parque-eolico.component'
 import {MensagemUtil} from '../../../core/util/mensagem.util';
@@ -30,7 +30,9 @@ export class HomeComponent implements OnInit {
   hasParquesEolicos(event){
     event.length > 0 ? this.parquesEolicos = event : this.parquesEolicos = [];
   }
+
   ngOnInit(): void {
   }
+
 
 }

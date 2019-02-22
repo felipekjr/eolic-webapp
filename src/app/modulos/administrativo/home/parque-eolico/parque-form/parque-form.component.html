@@ -7,7 +7,7 @@
         <form #form="ngForm" (ngSubmit)="persistirEntidade(form)">
           <div class="form-group">
             <label for="nome">Nome</label>
-            <input type="text" semEspacoBranco name="nome" class="form-control" [(ngModel)]="parqueEolico.nome" [ngClass]="{'is-invalid': form.submitted && form.controls['nome'].invalid}" required/>
+            <input type="text" maxlength="30" semEspacoBranco name="nome" class="form-control" [(ngModel)]="parqueEolico.nome" [ngClass]="{'is-invalid': form.submitted && form.controls['nome'].invalid}" required/>
             <span *ngIf="form.submitted &&  form.controls['nome'].invalid" class="text-danger">*Preencha o nome corretamente</span>
           </div>
           <div class="form-group">
@@ -27,7 +27,8 @@
           </div>
           <div class="form-group">
             <label for="complexoEolico">Complexo Eólico</label>
-            <select semEspacoBranco [compareWith]="compareInSelect"  class="form-control" name="complexoEolico" [(ngModel)]="parqueEolico.complexoEolico"  [ngClass]="{'is-invalid': form.submitted && form.controls['complexoEolico'].invalid}" required>
+            <select semEspacoBranco [compareWith]="compareInSelect" class="form-control" name="complexoEolico" [(ngModel)]="parqueEolico.complexoEolico"  [ngClass]="{'is-invalid': form.submitted && form.controls['complexoEolico'].invalid}" required>
+              <option value="">--</option>
               <option *ngFor="let complexo of complexosEolicos" [ngValue]="complexo" >{{complexo.nome}}</option>
             </select>
             <span *ngIf="form.submitted &&  form.controls['complexoEolico'].invalid" class="text-danger">*Escolha o complexo</span>

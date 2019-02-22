@@ -8,12 +8,12 @@
         <form #form="ngForm" (ngSubmit)="persistirEntidade(form)">
           <div class="form-group">
             <label for="nome">Nome:</label>
-            <input type="text" name="nome" semEspacoBranco class="form-control" [(ngModel)]="complexoEolico.nome" [ngClass]="{'is-invalid': form.submitted && form.controls['nome'].invalid}" required/>
+            <input type="text" maxlength="30" name="nome" semEspacoBranco class="form-control" [(ngModel)]="complexoEolico.nome" [ngClass]="{'is-invalid': form.submitted && form.controls['nome'].invalid}" required/>
             <span *ngIf="form.submitted &&  form.controls['nome'].invalid" class="text-danger">*Preencha o nome corretamente</span>
           </div>
           <div class="form-group">
             <label for="identificador">Identificador:</label>
-            <input type="text" semEspacoBranco name="identificador" class="form-control"
+            <input type="text" maxlength="30" semEspacoBranco name="identificador" class="form-control"
                    [(ngModel)]="complexoEolico.identificador"  [ngClass]="{'is-invalid': form.submitted && form.controls['identificador'].invalid}" required/>
             <span *ngIf="form.submitted &&  form.controls['identificador'].invalid" class="text-danger">*Preencha o identificador corretamente</span>
           </div>
